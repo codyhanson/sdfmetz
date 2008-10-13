@@ -1,0 +1,377 @@
+definition
+
+%% Grammar to parse ANTLR grammars.
+%% Based on antlr.g from the ANTLR distribution version 2.7.5.
+%% Author : Joost Visser
+
+module Main
+exports
+sorts
+  %WS-OPT% %WS% INTERNAL-RULE-REF %WS-LOOP% COMMENT RULE-REF TOKEN-REF NESTED-ACTION STRING-LITERAL CHAR-LITERAL ACTION NESTED-ARG-ACTION ARG-ACTION INT XDIGIT DIGIT ESC BANG CARET IMPLIES PLUS STAR QUESTION Asterisk ML-COMMENT CR SL-COMMENT Id QualifiedID NotTerminal Ast-type-spec Terminal Range Ebnf Block OptionsSpec RootNode Tree Element ElementNoOptionSpec SEMPRED ElementOptionSpec OptionValue ExceptionHandler ExceptionSpecNoLabel ExceptionSpec Alternative ThrowsSpec Rule DOC-COMMENT %TreeParserSpec% TokensSpec SuperClass Spec LexerOptionsSpec %ParserSpec% TokensSpecOptions SetBlockElement CharSet ClassDef Grammar
+sorts
+  NotRCURLY NotRBRACKET CRLF LF NotFollowedBy0-7
+  SingleOptionSpec ClassHeader SingleTokenSpec Modifier
+  NoAssignElementBody AssignElementBody OptionsSpecOrAction
+  RegExpOperator EbnfBody TokenRefOrStringLit NegatedElement
+  OptionAssignment OptionAssignmentSemi GrammarHeader
+
+context-free syntax
+
+  "header" STRING-LITERAL? ACTION -> GrammarHeader {cons("GrammarHeader")}
+
+  GrammarHeader*
+  OptionsSpec?
+  ClassDef*
+    -> Grammar {cons("Grammar")}
+
+  ACTION?
+  DOC-COMMENT?
+  ( Spec
+  %%| TreeParserSpec
+  %%| ParserSpec
+  )
+  Rule+
+    -> ClassDef {cons("ClassDef")}
+
+  Id "=" OptionValue ";" -> OptionAssignmentSemi {cons("OptionAssignmentSemi")}
+  Id "=" OptionValue -> OptionAssignment {cons("OptionAssignment")}
+
+  "options" "{"
+  OptionAssignmentSemi* 
+  "}"
+    -> OptionsSpec {cons("OptionsSpec")}
+    
+  "charVocabulary" "=" CharSet ";" -> SingleOptionSpec {cons("LexOption")}
+  Id "=" OptionValue ";"           -> SingleOptionSpec {cons("Option")}
+    
+  "options" "{"
+  SingleOptionSpec*
+  "}"
+    -> LexerOptionsSpec  {cons("LexerOptionsSpec")}
+
+  QualifiedID       -> OptionValue {cons("IdValue")}
+  STRING-LITERAL    -> OptionValue {cons("StringValue")}
+  CHAR-LITERAL      -> OptionValue {cons("CharValue")}
+  INT               -> OptionValue {cons("IntValue")}
+    
+  {SetBlockElement ","}+
+    -> CharSet {cons("CharSet")}
+
+  CHAR-LITERAL
+  ( ".." CHAR-LITERAL )?
+    -> SetBlockElement {cons("SetBlockElement")}
+    
+  TOKEN-REF ("=" STRING-LITERAL)? TokensSpecOptions? 
+    -> SingleTokenSpec {cons("TokenRefSpec")}
+  STRING-LITERAL TokensSpecOptions?
+    -> SingleTokenSpec {cons("StringLitTokenSpec")}
+
+  "tokens" "{"
+  ( SingleTokenSpec
+    ";"
+  )+
+  "}"
+    -> TokensSpec {cons("TokensSpec")}
+    
+  "<"
+  {OptionAssignment ";"}+
+  ">"
+    -> TokensSpecOptions {cons("TokensSpecOptions")}
+    
+  "(" STRING-LITERAL ")"
+    -> SuperClass {cons("SuperClass")}
+    
+%%  "class" Id
+%%  "extends" Id SuperClass?
+%%  ";"
+%%  OptionsSpec?
+%%  TokensSpec?
+%%  ACTION?
+%%    -> ParserSpec {cons("ParserSpec")}
+    
+  "lexclass" Id                       -> ClassHeader {cons("LexClassHeader")}
+  "class" Id "extends" Id SuperClass? -> ClassHeader {cons("ClassHeader")}
+    
+  ClassHeader
+  ";"
+  LexerOptionsSpec?
+  TokensSpec?
+  ACTION?
+    -> Spec {cons("Spec")}
+    
+%%  "class" Id
+%%  "extends" Id SuperClass?
+%%  ";"
+%%  OptionsSpec?
+%%  TokensSpec?
+%%  ACTION?
+%%    -> TreeParserSpec {cons("TreeParserSpec")}
+
+  DOC-COMMENT?
+  Modifier?
+  Id
+  BANG?
+  ARG-ACTION?
+  ( "returns" ARG-ACTION )?
+  ThrowsSpec?
+  OptionsSpec?
+  ACTION?
+  ":" Block ";"
+  ExceptionSpec*
+    -> Rule {cons("Rule")}
+    
+  "throws" {Id ","}+
+    -> ThrowsSpec {cons("ThrowsSpec")}
+    
+  {Alternative "|"}+
+    -> Block {cons("Block")}
+    
+  BANG?
+  Element* ExceptionSpecNoLabel?
+    -> Alternative {cons("Alternative")}
+    
+  "exception"
+  ARG-ACTION?
+  ExceptionHandler*
+    -> ExceptionSpec {cons("ExceptionSpec")}
+
+  "exception"
+  ExceptionHandler*
+    -> ExceptionSpecNoLabel {cons("ExceptionSpecNoLabel")}
+
+  "catch"
+  ARG-ACTION
+  ACTION
+    -> ExceptionHandler {cons("ExceptionHandler")}
+
+  ElementNoOptionSpec ElementOptionSpec?
+    -> Element {cons("Element")}
+    
+  "<"
+  {OptionAssignment ";"}+
+  ">"
+    -> ElementOptionSpec {cons("ElementOptionSpec")}
+    
+  RULE-REF ARG-ACTION? BANG? -> AssignElementBody {cons("RuleRefElt")}
+  TOKEN-REF ARG-ACTION?      -> AssignElementBody {cons("TokenRefElt")}
+    
+  NotTerminal -> NegatedElement {cons("NegatedNotTerminal")}
+  Ebnf        -> NegatedElement {cons("NegatedEbnf")}
+   
+  RULE-REF ARG-ACTION? BANG?  -> NoAssignElementBody {cons("RuleRefEltNoAssign")}
+  Range                       -> NoAssignElementBody {cons("RangeElt")}
+  Terminal                    -> NoAssignElementBody {cons("TerminalElt")}
+  "~" NegatedElement          -> NoAssignElementBody {cons("NegatedElt")}
+  Ebnf                        -> NoAssignElementBody {cons("EbnfElt")}
+    
+  Id
+  "="
+  ( Id ":" )?
+  AssignElementBody
+                -> ElementNoOptionSpec {cons("AssignElement")}
+  ( Id ":" )?
+  NoAssignElementBody
+                -> ElementNoOptionSpec {cons("NoAssignElement")}
+  ACTION        -> ElementNoOptionSpec {cons("ActionElement")}
+  SEMPRED       -> ElementNoOptionSpec {cons("SemPredElement")}
+  Tree          -> ElementNoOptionSpec {cons("TreeElement")}
+    
+    
+  "#("
+  RootNode
+  Element+
+  ")"
+    -> Tree {cons("Tree")}
+    
+  ( Id ":" )?
+  Terminal
+    -> RootNode {cons("RootNode")}
+    
+  OptionsSpec ACTION? ":" -> OptionsSpecOrAction {cons("OptionsSpecAndMaybeAction")}
+  ACTION ":"              -> OptionsSpecOrAction {cons("Action")}
+  
+  QUESTION -> RegExpOperator {cons("Question")}
+  STAR     -> RegExpOperator {cons("Star")}
+  PLUS     -> RegExpOperator {cons("Plus")}
+  
+  RegExpOperator? BANG? -> EbnfBody {cons("EbnfBodyRegExp")}
+  IMPLIES               -> EbnfBody {cons("EbnfBodyImplies")}
+  
+  "("
+  OptionsSpecOrAction?
+  Block
+  ")"
+  EbnfBody
+    -> Ebnf {cons("Ebnf")}
+    
+  CARET     -> Ast-type-spec {cons("CaretAstType")}
+  BANG      -> Ast-type-spec {cons("BangAstType")}
+            -> Ast-type-spec {cons("NoAstType")}
+
+  TOKEN-REF      -> TokenRefOrStringLit {cons("TokenRef")}
+  STRING-LITERAL -> TokenRefOrStringLit {cons("StringLit")}
+
+  CHAR-LITERAL ".." CHAR-LITERAL BANG? -> Range {cons("CharRange")}
+  TokenRefOrStringLit
+  ".."
+  TokenRefOrStringLit
+  Ast-type-spec                         -> Range {cons("StringTokenRange")}
+    
+  CHAR-LITERAL BANG?                   -> Terminal {cons("CharLiteralT")}
+  TOKEN-REF Ast-type-spec ARG-ACTION?  -> Terminal {cons("TokenRefT")}
+  STRING-LITERAL Ast-type-spec         -> Terminal {cons("StringLiteralT")}
+  "." Ast-type-spec               -> Terminal {cons("WildCardT")}
+    
+  CHAR-LITERAL BANG?          -> NotTerminal {cons("CharLiteralNT")}
+  TOKEN-REF Ast-type-spec     -> NotTerminal {cons("TokenRefNT")}
+    
+  {Id "."}+
+    -> QualifiedID {cons("QualifiedID")}
+    
+  TOKEN-REF   -> Id {cons("TokenRefId")}
+  RULE-REF    -> Id {cons("RuleRefId")}
+
+lexical syntax
+
+  [\ \t\013\n] -> LAYOUT
+  
+context-free restrictions
+
+  LAYOUT? -/- [\ \t\013\n]
+  
+lexical syntax
+
+  COMMENT -> LAYOUT
+
+  SL-COMMENT | ML-COMMENT
+    -> COMMENT
+
+  "//" ~[\013\n]* ( CRLF | CR | LF )
+    -> SL-COMMENT
+  [\013] -> CR
+  [\013][\n] -> CRLF
+  [\n] -> LF
+    
+lexical restrictions
+  CR -/- [\n]
+
+lexical syntax
+
+  "/*" ( ~[\*] | Asterisk )* "*/"
+    -> ML-COMMENT  
+  "/**" ( ~[\*] | Asterisk )* "*/"
+    -> DOC-COMMENT
+  [\*] -> Asterisk
+  
+lexical restrictions
+  Asterisk -/- [\/]
+  "/*" -/- [\*]
+
+context-free restrictions
+  LAYOUT? -/- [\/].[\*].~[\*]
+  LAYOUT? -/- [\/].[\/]
+  
+lexical syntax
+  [\?]     -> QUESTION
+  [\*]     -> STAR
+  [\+]     -> PLUS
+  "=>"     -> IMPLIES
+  [\^]     -> CARET
+  [\!]     -> BANG
+  
+  [\'] (ESC|~[\']) [\']    -> CHAR-LITERAL
+  
+  %% Forbidding line terminators inside STRING-LITERALs.
+  %% Prevents ambiguities with NESTED-ACTION.
+  %% Perhaps this is not correct?
+  %% Also forbidding backslash a non-ESC.
+  [\"] (ESC|~[\"\n\013\\])* [\"]   -> STRING-LITERAL
+
+  [\\] 
+  ( [nrtbfwa\"\'\\] 
+  | ([0-7]NotFollowedBy0-7)
+  | ([0-7][0-7]NotFollowedBy0-7)
+  | ([0-3][0-7][0-7])
+%%  | ( [0-3]([0-7][0-7]?)? )
+%%  | ( [4-7][0-7]? )
+  | ( [u] XDIGIT XDIGIT XDIGIT XDIGIT )
+  )
+    -> ESC
+
+  [0-9]         -> DIGIT
+  [0-9a-fA-F]   -> XDIGIT
+  [0-9]+        -> INT
+  
+  %% Empty sort, just to trigger follow restriction
+                -> NotFollowedBy0-7
+  
+lexical restrictions
+  NotFollowedBy0-7 -/- [0-7]
+
+lexical syntax
+  
+  NESTED-ARG-ACTION
+    -> ARG-ACTION
+    
+  [\[]
+  ( NESTED-ARG-ACTION
+  | CRLF
+  | CR
+  | LF
+  | CHAR-LITERAL
+  | STRING-LITERAL
+  | NotRBRACKET
+  )*
+  [\]]
+    -> NESTED-ARG-ACTION
+  
+  ~[\]] -> NotRBRACKET {avoid}
+    
+  NESTED-ACTION
+    -> ACTION
+    
+  NESTED-ACTION
+  [\?]
+    -> SEMPRED
+    
+  [\{]
+  ( ( CRLF | CR | LF )
+  | NESTED-ACTION
+  | CHAR-LITERAL
+  | COMMENT
+  | STRING-LITERAL
+  | NotRCURLY
+  )*
+  [\}]
+    -> NESTED-ACTION
+
+  %% Forbidding loose double quote symbols inside ACTIONs.  
+  ~[\}\"] -> NotRCURLY {avoid}
+  
+  [A-Z] [a-zA-Z\_0-9]*
+    -> TOKEN-REF
+    
+  INTERNAL-RULE-REF
+  %WS-LOOP%
+    -> RULE-REF
+
+  %%(WS | COMMENT )*
+  %%  -> WS-LOOP
+
+  [a-z] [a-zA-Z\_0-9]*
+    -> INTERNAL-RULE-REF
+    
+  %%WS?
+  %%  -> WS-OPT
+
+lexical restrictions
+
+  TOKEN-REF INTERNAL-RULE-REF -/- [a-zA-Z\_0-9]
+  
+lexical syntax
+
+  "protected"   -> Modifier
+  "public"      -> Modifier
+  "private"     -> Modifier
+    
+
