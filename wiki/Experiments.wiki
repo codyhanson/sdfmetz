@@ -1,3 +1,5 @@
+#summary Experiments done with grammar metrics.
+
 ==A grammar comparison experiment==
 
 As an initial experimant in grammar metrication, we have applied !SdfMetz to collect metrics data for a range of grammars from various origins. Full details about this experiment can be found in the Section *Data Collection* in:
