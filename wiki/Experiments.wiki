@@ -4,7 +4,7 @@
 
 As an initial experimant in grammar metrication, we have applied !SdfMetz to collect metrics data for a range of grammars from various origins. Full details about this experiment can be found in the Section *Data Collection* in:
 
-   * Tiago Alves and Joost Visser, _Metrication of SDF Grammars_. Technical Report, DI-Research.PURe-05.05.01, Departamento de Informática, Universidade do Minho, May 2005. [http://wiki.di.uminho.pt/wiki/pub/Research.PURe/PURePublications/DI-Research.PURe-05-05-01.pdf pdf]
+   * Tiago Alves and Joost Visser, _Metrication of SDF Grammars_. Technical Report, DI-Research.PURe-05.05.01, Departamento de Informática, Universidade do Minho, May 2005. [http://wiki.di.uminho.pt/twiki/pub/Personal/Tiago/Publications/DI-PURe-05-05-01.pdf pdf]
 
 ===Sampled grammars===
 
