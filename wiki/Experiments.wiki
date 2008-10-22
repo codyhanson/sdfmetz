@@ -12,7 +12,7 @@ The sampled grammars include 18 SDF grammars for languages such as Yacc, !BibTex
 
   * *sfi*  - Grammars freely available in the [http://www.cs.vu.nl/Strafunski/ Strafunski] bundle
   * *pg*  - Grammars freely available in the [http://www.cwi.nl/htbin/sen1/twiki/bin/view/SEN1/ParsetableGenerator PGen]
-  * *gb*  - Grammars freely available from the [http://www.cs.uu.nl/~mdejonge/grammar-base/ Grammar Base]
+  * *gb*  - Grammars freely available from the [http://www.cs.uu.nl/~mdejonge/grammar-base/ Grammar Base] *(unavailable)*
   * *sig* - Grammars gently provided by Dr. Tobias Kuipers from [http://www.sig.nl Software Improvement Group]
 
 Furthermore, five DMS grammars for ECMAScript, PHP, Java, Verilog, and C++ were sampled:
