@@ -1,7 +1,7 @@
 #summary background of the tool.
 
 !SdfMetz is intended to be an instrument for Grammar Engineering. An overview of research into grammar engineering can be found in:
-  * P. Klint and R. Lämmel and C. Verhoef, [http://www.cs.vu.nl/grammarware/agenda/ Towards an engineering discipline for grammarware].
+  * P. Klint and R. Lämmel and C. Verhoef, [http://www.cs.vu.nl/grammarware/agenda/ Towards an engineering discipline for grammarware], [http://www.cs.vu.nl/grammarware/agenda/paper.pdf (PDF)].
 
 In particular, !SdfMetz is inspired by
   * James F. Power and Brian A. Malloy, [http://www.cs.nuim.ie/~jpower/Research/Papers/2004 A metrics suite for grammar-based software], [http://www.cs.nuim.ie/~jpower/Research/Papers/2004/jsme04.pdf (PDF)].
