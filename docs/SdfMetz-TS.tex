@@ -1,0 +1,30 @@
+\begin{hcarentry}{SdfMetz}
+\report{Tiago Miguel Laureano Alves}%unchanged at least once
+\participants{Joost Visser}
+\status{stable, maintained}
+\makeheader
+
+SdfMetz supports grammar engineering by calculating grammar metrics and other analyses. 
+Currently it supports four different grammar formalisms (SDF, DMS, Antlr, and Bison).
+The category of supported metrics are size, complexity, structural and disambiguation.
+The disambiguation metrics are applicable to the SDF formalism only.
+Metrics output is a textual report or in Comma Separated Value format.
+The additional analyses implemented are graph visualization of the immediate successor graph, transitive closure graph and strongly-connected components graph outputted in DOT format, and visualization of the non-singleton levels of a grammar.
+
+The definition of all except the ambiguity and the NPath metrics were taken from the paper
+\emph{A metrics suite for grammar based-software} by James F.\ Power and Brian A.\ Malloy. 
+The ambiguity metrics were defined by the tool author exploiting specific aspects of SDF grammars, and the NPath metric definition was taken from the paper \emph{NPATH: a measure of execution path complexity and its applications}.
+
+The tool was used successfully in a grammar engineering work presented in the paper \emph{A Case Study in Grammar Engineering}.
+
+\FuturePlans
+Efforts are underway to develop functionalities to compute quality profiles based on histograms.
+Furthermore, more metrics will be added, and a web-interface is planned.
+
+\FinalNote
+The tool was initially developed in the context of the IKF-P project (Information Knowledge Fusion, \url{http://ikf.sidereus.pt/}) to develop a grammar for ISO VDM-SL.
+
+\FurtherReading
+The web site of SdfMetz
+(\url{http://sdfmetz.googlecode.com}) includes the tool source code, and pointers to relevant work about grammar metrication.
+\end{hcarentry}
