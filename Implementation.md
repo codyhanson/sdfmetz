@@ -1,0 +1,3 @@
+The SdfMetz tool was implemented in the functional programming language [Haskell](http://www.haskell.org) using the [Strafunski](http://www.cs.vu.nl/Strafunski/) bundle for generic traversal support.
+
+The tool was developed using a _grammar-centered_ approach, where various kinds of functionality were automatically generated from a concrete syntax definition of the SDF language (the SDF language specified in SDF). The parser was automatically generated with !sdf2table, from the SDF bundle. The Haskell support for representing, and pretty-printing abstract syntax trees (ASTs) was automatically generated with Sdf2Haskell, from the Strafunski bundle. AST traversal and marshalling support was generated with the Strafunski-aware !DrIFT tool.
