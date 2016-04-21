@@ -1,0 +1,73 @@
+AC_INIT([sdf2-bundle],[2.0.1],[sdf@cs.uu.nl])
+AM_INIT_AUTOMAKE
+
+# set the prefix immediately to the default prefix
+test "x$prefix" = xNONE && prefix=$ac_default_prefix
+
+AC_ARG_WITH(aterm, 
+  AC_HELP_STRING([--with-aterm=DIR], [use ATerm Library at DIR @<:@PREFIX@:>@]),
+  ATERM=$withval, 
+  ATERM="$prefix"
+)
+AC_SUBST(ATERM)
+
+PKGS="toolbuslib pt-support asf-support asc-support sdf-support sglr pgen"
+AC_SUBST(PKGS)
+
+top_srcdir=`pwd`
+
+BUILD_TB_LIB=${top_srcdir}/pre-pkgs/build
+BUILD_PT_SUPPORT=${top_srcdir}/pre-pkgs/build
+BUILD_ASC_SUPPORT=${top_srcdir}/pre-pkgs/build
+BUILD_ASF_SUPPORT=${top_srcdir}/pre-pkgs/build
+BUILD_SDF_SUPPORT=${top_srcdir}/pre-pkgs/build
+BUILD_SGLR=${top_srcdir}/pre-pkgs/build
+
+DETECT_SVN_REVISION
+
+AC_CONFIG_FILES([
+  Makefile
+  sdf2-bundle.spec
+])
+AC_OUTPUT
+
+AB_CONFIG_PKG(toolbuslib,
+   --with-aterm=${ATERM}
+)
+AB_CONFIG_PKG(pt-support,
+   --with-aterm=${ATERM}
+   --with-toolbuslib=${BUILD_TB_LIB}
+)
+AB_CONFIG_PKG(asf-support,
+   --with-aterm=${ATERM}
+   --with-pt-support=${BUILD_PT_SUPPORT}
+)
+AB_CONFIG_PKG(asc-support,
+   --with-aterm=${ATERM}
+   --with-toolbuslib=${BUILD_TB_LIB}
+   --with-pt-support=${BUILD_PT_SUPPORT}
+   --with-asf-support=${BUILD_ASF_SUPPORT}
+)
+AB_CONFIG_PKG(sdf-support,
+   --with-aterm=${ATERM}
+   --with-toolbuslib=${BUILD_TB_LIB}
+   --with-pt-support=${BUILD_PT_SUPPORT}
+   --with-bundled-packages='${PKGS}'
+)
+AB_CONFIG_PKG(sglr,
+   --with-pt-support=${BUILD_PT_SUPPORT}
+   --with-aterm=${ATERM}
+   --with-toolbuslib=${BUILD_TB_LIB}
+   --with-bundled-packages='${PKGS}'
+)
+AB_CONFIG_PKG(pgen,
+   --with-asc-support=${BUILD_ASC_SUPPORT}
+   --with-asf-support=${BUILD_ASF_SUPPORT}
+   --with-sdf-support=${BUILD_SDF_SUPPORT}
+   --with-pt-support=${BUILD_PT_SUPPORT}
+   --with-sglr=${BUILD_SGLR}
+   --with-runtime-sglr=${prefix}
+   --with-aterm=${ATERM}
+   --with-toolbuslib=${BUILD_TB_LIB}
+   --with-bundled-packages='${PKGS}'
+)

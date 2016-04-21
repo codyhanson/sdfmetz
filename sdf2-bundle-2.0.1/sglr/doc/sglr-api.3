@@ -1,0 +1,449 @@
+.rn '' }`
+''' $RCSfile$$Revision$$Date$
+'''
+''' $Log$
+'''
+.de Sh
+.br
+.if t .Sp
+.ne 5
+.PP
+\fB\\$1\fR
+.PP
+..
+.de Sp
+.if t .sp .5v
+.if n .sp
+..
+.de Ip
+.br
+.ie \\n(.$>=3 .ne \\$3
+.el .ne 3
+.IP "\\$1" \\$2
+..
+.de Vb
+.ft CW
+.nf
+.ne \\$1
+..
+.de Ve
+.ft R
+
+.fi
+..
+'''
+'''
+'''     Set up \*(-- to give an unbreakable dash;
+'''     string Tr holds user defined translation string.
+'''     Bell System Logo is used as a dummy character.
+'''
+.tr \(*W-|\(bv\*(Tr
+.ie n \{\
+.ds -- \(*W-
+.ds PI pi
+.if (\n(.H=4u)&(1m=24u) .ds -- \(*W\h'-12u'\(*W\h'-12u'-\" diablo 10 pitch
+.if (\n(.H=4u)&(1m=20u) .ds -- \(*W\h'-12u'\(*W\h'-8u'-\" diablo 12 pitch
+.ds L" ""
+.ds R" ""
+'''   \*(M", \*(S", \*(N" and \*(T" are the equivalent of
+'''   \*(L" and \*(R", except that they are used on ".xx" lines,
+'''   such as .IP and .SH, which do another additional levels of
+'''   double-quote interpretation
+.ds M" """
+.ds S" """
+.ds N" """""
+.ds T" """""
+.ds L' '
+.ds R' '
+.ds M' '
+.ds S' '
+.ds N' '
+.ds T' '
+'br\}
+.el\{\
+.ds -- \(em\|
+.tr \*(Tr
+.ds L" ``
+.ds R" ''
+.ds M" ``
+.ds S" ''
+.ds N" ``
+.ds T" ''
+.ds L' `
+.ds R' '
+.ds M' `
+.ds S' '
+.ds N' `
+.ds T' '
+.ds PI \(*p
+'br\}
+.\"	If the F register is turned on, we'll generate
+.\"	index entries out stderr for the following things:
+.\"		TH	Title 
+.\"		SH	Header
+.\"		Sh	Subsection 
+.\"		Ip	Item
+.\"		X<>	Xref  (embedded
+.\"	Of course, you have to process the output yourself
+.\"	in some meaninful fashion.
+.if \nF \{
+.de IX
+.tm Index:\\$1\t\\n%\t"\\$2"
+..
+.nr % 0
+.rr F
+.\}
+.TH sglr-api 3 "3.10.2" "21/Jul/2002" "Meta-Environment Documentation"
+.UC
+.if n .hy 0
+.if n .na
+.ds C+ C\v'-.1v'\h'-1p'\s-2+\h'-1p'+\s0\v'.1v'\h'-1p'
+.de CQ          \" put $1 in typewriter font
+.ft CW
+'if n "\c
+'if t \\&\\$1\c
+'if n \\&\\$1\c
+'if n \&"
+\\&\\$2 \\$3 \\$4 \\$5 \\$6 \\$7
+'.ft R
+..
+.\" @(#)ms.acc 1.5 88/02/08 SMI; from UCB 4.2
+.	\" AM - accent mark definitions
+.bd B 3
+.	\" fudge factors for nroff and troff
+.if n \{\
+.	ds #H 0
+.	ds #V .8m
+.	ds #F .3m
+.	ds #[ \f1
+.	ds #] \fP
+.\}
+.if t \{\
+.	ds #H ((1u-(\\\\n(.fu%2u))*.13m)
+.	ds #V .6m
+.	ds #F 0
+.	ds #[ \&
+.	ds #] \&
+.\}
+.	\" simple accents for nroff and troff
+.if n \{\
+.	ds ' \&
+.	ds ` \&
+.	ds ^ \&
+.	ds , \&
+.	ds ~ ~
+.	ds ? ?
+.	ds ! !
+.	ds /
+.	ds q
+.\}
+.if t \{\
+.	ds ' \\k:\h'-(\\n(.wu*8/10-\*(#H)'\'\h"|\\n:u"
+.	ds ` \\k:\h'-(\\n(.wu*8/10-\*(#H)'\`\h'|\\n:u'
+.	ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'^\h'|\\n:u'
+.	ds , \\k:\h'-(\\n(.wu*8/10)',\h'|\\n:u'
+.	ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'~\h'|\\n:u'
+.	ds ? \s-2c\h'-\w'c'u*7/10'\u\h'\*(#H'\zi\d\s+2\h'\w'c'u*8/10'
+.	ds ! \s-2\(or\s+2\h'-\w'\(or'u'\v'-.8m'.\v'.8m'
+.	ds / \\k:\h'-(\\n(.wu*8/10-\*(#H)'\z\(sl\h'|\\n:u'
+.	ds q o\h'-\w'o'u*8/10'\s-4\v'.4m'\z\(*i\v'-.4m'\s+4\h'\w'o'u*8/10'
+.\}
+.	\" troff and (daisy-wheel) nroff accents
+.ds : \\k:\h'-(\\n(.wu*8/10-\*(#H+.1m+\*(#F)'\v'-\*(#V'\z.\h'.2m+\*(#F'.\h'|\\n:u'\v'\*(#V'
+.ds 8 \h'\*(#H'\(*b\h'-\*(#H'
+.ds v \\k:\h'-(\\n(.wu*9/10-\*(#H)'\v'-\*(#V'\*(#[\s-4v\s0\v'\*(#V'\h'|\\n:u'\*(#]
+.ds _ \\k:\h'-(\\n(.wu*9/10-\*(#H+(\*(#F*2/3))'\v'-.4m'\z\(hy\v'.4m'\h'|\\n:u'
+.ds . \\k:\h'-(\\n(.wu*8/10)'\v'\*(#V*4/10'\z.\v'-\*(#V*4/10'\h'|\\n:u'
+.ds 3 \*(#[\v'.2m'\s-2\&3\s0\v'-.2m'\*(#]
+.ds o \\k:\h'-(\\n(.wu+\w'\(de'u-\*(#H)/2u'\v'-.3n'\*(#[\z\(de\v'.3n'\h'|\\n:u'\*(#]
+.ds d- \h'\*(#H'\(pd\h'-\w'~'u'\v'-.25m'\f2\(hy\fP\v'.25m'\h'-\*(#H'
+.ds D- D\\k:\h'-\w'D'u'\v'-.11m'\z\(hy\v'.11m'\h'|\\n:u'
+.ds th \*(#[\v'.3m'\s+1I\s-1\v'-.3m'\h'-(\w'I'u*2/3)'\s-1o\s+1\*(#]
+.ds Th \*(#[\s+2I\s-2\h'-\w'I'u*3/5'\v'-.3m'o\v'.3m'\*(#]
+.ds ae a\h'-(\w'a'u*4/10)'e
+.ds Ae A\h'-(\w'A'u*4/10)'E
+.ds oe o\h'-(\w'o'u*4/10)'e
+.ds Oe O\h'-(\w'O'u*4/10)'E
+.	\" corrections for vroff
+.if v .ds ~ \\k:\h'-(\\n(.wu*9/10-\*(#H)'\s-2\u~\d\s+2\h'|\\n:u'
+.if v .ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'\v'-.4m'^\v'.4m'\h'|\\n:u'
+.	\" for low resolution devices (crt and lpr)
+.if \n(.H>23 .if \n(.V>19 \
+\{\
+.	ds : e
+.	ds 8 ss
+.	ds v \h'-1'\o'\(aa\(ga'
+.	ds _ \h'-1'^
+.	ds . \h'-1'.
+.	ds 3 3
+.	ds o a
+.	ds d- d\h'-1'\(ga
+.	ds D- D\h'-1'\(hy
+.	ds th \o'bp'
+.	ds Th \o'LP'
+.	ds ae ae
+.	ds Ae AE
+.	ds oe oe
+.	ds Oe OE
+.\}
+.rm #[ #] #H #V #F C
+.SH "NAME"
+\fBSGinitParser\fR, \fBSGopenLanguageFromTerm\fR, \fBSGopenLanguage\fR, \fBSGcloseLanguage\fR, \fBSGreOpenLanguage\fR, \fBSGparseString\fR, \fBSGparseStringAsAsFix2\fR, \fBSGparseStringAsAsFix1\fR, \fBSGparseFile\fR, \fBSGtermToFile\fR, \fBSGparseFileUsingTable\fR, \fBSGisParseTree\fR, \fBSGisParseError\fR \- an interface to the Scannerless Generalized LR parser
+.SH "LIBRARY"
+SGLR library (libsglr, \-lsglr)
+.SH "SYNOPSIS"
+.Sh "\fBDefinitions\fR"
+.Ip "#include <sglr.h>" 4
+.Sh "\fB\s-1API\s0 Functions\fR"
+.Ip "void  \fBSGinitParser\fR(ATbool toolbus_mode);" 4
+.Ip "ATerm \fBSGopenlanguageFromTerm\fR(char *errpre, language lang, ATerm tbl);" 4
+.Ip "ATerm \fBSGopenlanguage\fR(char *errpre, language lang, char *tblfil);" 4
+.Ip "ATerm \fBSGcloselanguage\fR(char *errpre, language lang);" 4
+.Ip "ATerm \fBSGreOpenlanguage\fR(char *errpre, language lang, char *tblfil);" 4
+.Ip "ATerm \fBSGgetTopSymbols\fR(language lang);" 4
+.Ip "ATerm \fBSGparseString\fR(language lang, char *sort, char *str);" 4
+.Ip "ATerm \fBSGparseStringAsAsFix2\fR(language lang, char *sort, char *str);" 4
+.Ip "ATerm \fBSGparseStringAsAsFix1\fR(language lang, char *sort, char *str);" 4
+.Ip "ATerm \fBSGparseFile\fR(char *errpre, language lang, char *sort, char *infil);" 4
+.Ip "ATerm \fBSGparseFileUsingTable\fR(char *errpre, char *tblfil, char *sort, char *infil, char *outfil);" 4
+.Ip "ATerm \fBSGtermToFile\fR(char *errpre, ATerm frst, char *outfil);" 4
+.Ip "ATbool \fBSGisParseTree\fR(ATerm frst);" 4
+.Ip "ATBool \fBSGisParseError\fR(ATerm frst);" 4
+.Sh "\fBOperating Mode Macros\fR"
+.Ip "ATbool \fB\s-1SG_VERBOSE\s0\fR;  \fB\s-1SG_VERBOSE_ON\s0\fR(), \fB\s-1SG_VERBOSE_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_DEBUG\s0\fR;  \fB\s-1SG_DEBUG_ON\s0\fR(), \fB\s-1SG_DEBUG_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_SHOWSTAT\s0\fR;  \fB\s-1SG_SHOWSTAT_ON\s0\fR(), \fB\s-1SG_SHOWSTAT_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_OUTPUT\s0\fR;  \fB\s-1SG_OUTPUT_ON\s0\fR(), \fB\s-1SG_OUTPUT_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_ASFIX1\s0\fR;  \fB\s-1SG_ASFIX1_ON\s0\fR(), \fB\s-1SG_ASFIX1_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_BINARY\s0\fR;  \fB\s-1SG_BINARY_ON\s0\fR(), \fB\s-1SG_BINARY_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_FILTER\s0\fR;  \fB\s-1SG_FILTER_ON\s0\fR(), \fB\s-1SG_FILTER_OFF\s0\fR()" 4
+.Ip "ATbool \fB\s-1SG_FILTER_ASSOCIATIVITY\s0\fR; \fB\s-1SG_FILTER_ASSOCIATIVITY_ON\s0\fR(), \fB\s-1SG_FILTER_ASSOCIATIVITY_OFF\s0\fR" 4
+.Ip "ATbool \fB\s-1SG_FILTER_DIRECTEAGERNESS\s0\fR; \fB\s-1SG_FILTER_DIRECTEAGERNESS_ON\s0\fR(), \fB\s-1SG_FILTER_DIRECTEAGERNESS_OFF\s0\fR" 4
+.Ip "ATbool \fB\s-1SG_FILTER_EAGERNESS\s0\fR; \fB\s-1SG_FILTER_EAGERNESS_ON\s0\fR(), \fB\s-1SG_FILTER_EAGERNESS_OFF\s0\fR" 4
+.Ip "ATbool \fB\s-1SG_FILTER_INJECTIONCOUNT\s0\fR; \fB\s-1SG_FILTER_INJECTIONCOUNT_ON\s0\fR(), \fB\s-1SG_FILTER_INJECTIONCOUNT_OFF\s0\fR" 4
+.Ip "ATbool \fB\s-1SG_FILTER_PRIORITY\s0\fR; \fB\s-1SG_FILTER_PRIORITY_ON\s0\fR(), \fB\s-1SG_FILTER_PRIORITY_OFF\s0\fR" 4
+.Ip "ATbool \fB\s-1SG_FILTER_REJECT\s0\fR; \fB\s-1SG_FILTER_REJECT_ON\s0\fR(), \fB\s-1SG_FILTER_REJECT_OFF\s0\fR" 4
+.SH "DESCRIPTION"
+The \fBSGLR\fR API offers high-level support for parsing functionality.
+.PP
+A few key concepts: in order to parse an input term, a parse table for
+the language in which the term is supposed to be written must be
+present.  A database of parse tables is maintained for that purpose.
+In general, the user first makes sure the appropriate parse table for
+some language L is opened; after that, terms can be parsed over that
+language L.
+.PP
+As a result, either a parse error or a parse forest will be returned.
+Parse forests can be written to a file.
+.PP
+The functions in the API that return an \f(CWATerm\fR will return \f(CWNULL\fR on
+an operational error; bear in mind that a successful parse that
+stumbles upon a syntax error in the input term will produce an error
+term rather than \f(CWNULL\fR.  Functions for checking parse results are
+therefore also provided.
+.PP
+Throughout the interface, a  \f(CWerrpre\fR argument specifies a prefix that
+is used in contexts where an error message is returned to the user.  It
+is typically instantiated with the toolname, making it possible to
+identify the source of any occurring error message in a possibly
+complex toolchain.
+.SH "USAGE"
+.Sh "\fB\s-1API\s0 Functions\fR"
+.Ip "\fBSGinitParser\fR will make the parsing routines operate in default mode; \f(CWtoolbus_mode\fR determines whether or not to run as a ToolBus application." 4
+.Ip "The \fBSGopenLanguageFromTerm\fR and \fBSGopenLanguage\fR functions make a language available.  The language is registered under the name of the \f(CWname\fR argument; it is available for later use (i.e. can be retrieved from the parse table database) by that name.  \fBSGopenLanguageFromTerm\fR uses the parse table, represented as an \f(CWATerm\fR, from the \f(CWtbl\fR argument; \fBSGopenLanguage\fR reads the parse table from the file that is named by the \f(CWtblfil\fR argument." 4
+If a parse table of the indicated name is already present, the existing
+table will be used.  The \fBSGreOpenlanguage\fR, used identically to
+\fBSGopenlanguage\fR, replaces eventually existing parse tables by the
+table contained in the named file.
+.Ip "The \fBSGgetTopSymbols\fR function returns the symbols that are defined as start symbols in the requested language." 4
+.Ip "There are several ways of parsing an input term.  Assuming it does not contain \f(CWNULL\fR characters, it can be represented as a string. Such a string can then be parsed using the \fBSGparseString...\fR routines. The \f(CWlang\fR argument is a named language to parse the input term with; optionally, an explicit top sort to be produced by the parser can be specified using the \f(CWsort\fR argument.  The term to parse is contained as a string in \f(CWstr\fR.  The \fBAsAsFix2\fR and \fBAsAsFix1\fR variants can be used to obtain parse trees in AsFix2 and AsFix1 results, respectively; note that AsFix1 can contain parse trees only." 4
+.Ip "File-based parsing is provided by the \fBSGparseFile\fR and \fBSGparseFileUsingTable\fR functions.  In both functions, \f(CWsort\fR -- again, optional -- specifies the top sort the parse must produce." 4
+For \fBSGparseFile\fR, the term contained in named input file \f(CWinfil\fR
+is parsed over the parse table as previously opened and registered
+by the name \f(CWlang\fR.
+.Sp
+\fBSGparseFileUsingTable\fR uses a parse table contained in \f(CWtblfil\fR
+to parse the term contained in the named file \f(CWinfil\fR, and writes
+output to the named file \f(CWoutfil\fR.
+.Ip "After parsing, \fBSGtermToFile\fR writes the parse forest in \f(CWfrst\fR to the output file named \f(CWoutfil\fR." 4
+.Ip "The boolean functions \fBSGisParseTree\fR and \fBSGisParseError\fR inspect an \f(CWATerm\fR and will return whether or not it contains a parsetree, resp. a parse error." 4
+.Sh "\fBOperating Mode Macros\fR"
+A number of macros influence the parsing process.  The following naming
+convention is used:  use \f(CWSG_XXX\fR as a variable to check whether
+option \f(CWXXX\fR is enabled; use \f(CWSG_XXX_ON()\fR to enable and
+\f(CWSG_XXX_OFF()\fR to enable or disable option \s-1XXX\s0, respectively.
+.Ip "\fB\s-1SG_VERBOSE\s0\fR indicates whether or not parsing is performed in verbose mode;  \fB\s-1SG_VERBOSE_ON\s0\fR() switches into and \fB\s-1SG_VERBOSE_OFF\s0\fR() out of verbose operating mode." 4
+.Ip "With \fB\s-1SG_DEBUG\s0\fR on, debugging information is written to disk.  \fB\s-1SG_DEBUG_ON\s0\fR() enables and \fB\s-1SG_DEBUG_OFF\s0\fR() disables this." 4
+.Ip "When using \fB\s-1SG_SHOWSTAT\s0\fR, some run-time statistics are collected.  It is switched on by \fB\s-1SG_SHOWSTAT_ON\s0\fR() and off by \fB\s-1SG_SHOWSTAT_OFF\s0\fR()." 4
+.Ip "Unless \fB\s-1SG_OUTPUT\s0\fR is on (which it is by default) no output is generated.  In effect, a (fast) accepting/rejecting parser can be obtained by disabling output.  Switch it on using \fB\s-1SG_OUTPUT_ON\s0\fR(), off using \fB\s-1SG_OUTPUT_OFF\s0\fR()." 4
+.Ip "If you set \fB\s-1SG_ASFIX1\s0\fR, the parse result will be represented in AsFix1 format, if possible.  By default, AsFix2 format is used.  \fB\s-1SG_ASFIX1_ON\s0\fR() and \fB\s-1SG_ASFIX1_OFF\s0\fR() perform the obvious task; for convenience, \fB\s-1SG_ASFIX2\s0\fR, \fB\s-1SG_ASFIX2_ON\s0\fR(), and \fB\s-1SG_ASFIX2_OFF\s0\fR() are also provided." 4
+.Ip "\fB\s-1SG_BINARY\s0\fR determines whether terms are written in binary (shared) format, or in textual format when doing file I/O.  By default, the shared, binary format is used.  \fB\s-1SG_BINARY_ON\s0\fR() and \fB\s-1SG_BINARY_OFF\s0\fR() act as should be expected." 4
+.Ip "The \fB\s-1SG_FILTER\s0\fR option determines whether or not the parser applies a few common disambiguation strategies: subtree preference filtering, multiset filtering, and injection count filtering.  By default, filtering is applied; use \fB\s-1SG_FILTER_ON\s0\fR() to enable, \fB\s-1SG_FILTER_OFF\s0\fR() to disable all filters. If filtering is enabled, each filter can be toggled specifically also. " 4
+These specific toggles are supposed to be used for debugging purposes only.
+So, do not use these options to tweak your language implementations! It is
+highly probable that there will be no backward compatibility for them in 
+future versions.
+.SH "EXAMPLES"
+.PP
+.Vb 1
+\&  #include <sglr.h>
+.Ve
+.Vb 2
+\&  #define ME "MyParser"
+\&  #define L  "MyLanguageReferenceName"
+.Ve
+.Vb 4
+\&  int main(int argc, char **argv)
+\&  {
+\&    ATerm bottomOfStack;
+\&    ATerm forest;
+.Ve
+.Vb 1
+\&    if(argc != 4) exit(1);
+.Ve
+.Vb 1
+\&    ATinit(0, NULL, &bottomOfStack);
+.Ve
+.Vb 1
+\&    SGinitParser(ATfalse);
+.Ve
+.Vb 8
+\&    if(!SGopenLanguage(ME, L, argv[1])) {
+\&      fprintf(stderr, "error opening language %s (in %s)\en", L, argv[1]);
+\&      exit(2);
+\&    }
+\&    if(!(forest = SGparseFile(ME, L, NULL, argv[2]))) {
+\&      fprintf(stderr, "error parsing %s (over %s)\en", argv[2], L);
+\&      exit(3);
+\&    }
+.Ve
+.Vb 5
+\&    fprintf(stdout, "Parse successful, writing %s\en", argv[3]);
+\&    SG_BINARY_OFF();  /*  Make output to `-' (stdout) safe  */
+\&    SGtermToFile(ME, forest, argv[3]);
+\&    return 0;
+\&  }
+.Ve
+.SH "SEE ALSO"
+the \fIsglr\fR manpage, the \fItree2dot\fR manpage
+.SH "KNOWN BUGS"
+None.
+.SH "AUTHOR"
+Jeroen Scheerder <js@cwi.nl>
+
+.rn }` ''
+.IX Title "sglr-api 3"
+.IX Name "B<SGinitParser>, B<SGopenLanguageFromTerm>, B<SGopenLanguage>, B<SGcloseLanguage>, B<SGreOpenLanguage>, B<SGparseString>, B<SGparseStringAsAsFix2>, B<SGparseStringAsAsFix1>, B<SGparseFile>, B<SGtermToFile>, B<SGparseFileUsingTable>, B<SGisParseTree>, B<SGisParseError> - an interface to the Scannerless Generalized LR parser"
+
+.IX Header "NAME"
+
+.IX Header "LIBRARY"
+
+.IX Header "SYNOPSIS"
+
+.IX Subsection "\fBDefinitions\fR"
+
+.IX Item "#include <sglr.h>"
+
+.IX Subsection "\fB\s-1API\s0 Functions\fR"
+
+.IX Item "void  \fBSGinitParser\fR(ATbool toolbus_mode);"
+
+.IX Item "ATerm \fBSGopenlanguageFromTerm\fR(char *errpre, language lang, ATerm tbl);"
+
+.IX Item "ATerm \fBSGopenlanguage\fR(char *errpre, language lang, char *tblfil);"
+
+.IX Item "ATerm \fBSGcloselanguage\fR(char *errpre, language lang);"
+
+.IX Item "ATerm \fBSGreOpenlanguage\fR(char *errpre, language lang, char *tblfil);"
+
+.IX Item "ATerm \fBSGgetTopSymbols\fR(language lang);"
+
+.IX Item "ATerm \fBSGparseString\fR(language lang, char *sort, char *str);"
+
+.IX Item "ATerm \fBSGparseStringAsAsFix2\fR(language lang, char *sort, char *str);"
+
+.IX Item "ATerm \fBSGparseStringAsAsFix1\fR(language lang, char *sort, char *str);"
+
+.IX Item "ATerm \fBSGparseFile\fR(char *errpre, language lang, char *sort, char *infil);"
+
+.IX Item "ATerm \fBSGparseFileUsingTable\fR(char *errpre, char *tblfil, char *sort, char *infil, char *outfil);"
+
+.IX Item "ATerm \fBSGtermToFile\fR(char *errpre, ATerm frst, char *outfil);"
+
+.IX Item "ATbool \fBSGisParseTree\fR(ATerm frst);"
+
+.IX Item "ATBool \fBSGisParseError\fR(ATerm frst);"
+
+.IX Subsection "\fBOperating Mode Macros\fR"
+
+.IX Item "ATbool \fB\s-1SG_VERBOSE\s0\fR;  \fB\s-1SG_VERBOSE_ON\s0\fR(), \fB\s-1SG_VERBOSE_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_DEBUG\s0\fR;  \fB\s-1SG_DEBUG_ON\s0\fR(), \fB\s-1SG_DEBUG_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_SHOWSTAT\s0\fR;  \fB\s-1SG_SHOWSTAT_ON\s0\fR(), \fB\s-1SG_SHOWSTAT_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_OUTPUT\s0\fR;  \fB\s-1SG_OUTPUT_ON\s0\fR(), \fB\s-1SG_OUTPUT_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_ASFIX1\s0\fR;  \fB\s-1SG_ASFIX1_ON\s0\fR(), \fB\s-1SG_ASFIX1_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_BINARY\s0\fR;  \fB\s-1SG_BINARY_ON\s0\fR(), \fB\s-1SG_BINARY_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_FILTER\s0\fR;  \fB\s-1SG_FILTER_ON\s0\fR(), \fB\s-1SG_FILTER_OFF\s0\fR()"
+
+.IX Item "ATbool \fB\s-1SG_FILTER_ASSOCIATIVITY\s0\fR; \fB\s-1SG_FILTER_ASSOCIATIVITY_ON\s0\fR(), \fB\s-1SG_FILTER_ASSOCIATIVITY_OFF\s0\fR"
+
+.IX Item "ATbool \fB\s-1SG_FILTER_DIRECTEAGERNESS\s0\fR; \fB\s-1SG_FILTER_DIRECTEAGERNESS_ON\s0\fR(), \fB\s-1SG_FILTER_DIRECTEAGERNESS_OFF\s0\fR"
+
+.IX Item "ATbool \fB\s-1SG_FILTER_EAGERNESS\s0\fR; \fB\s-1SG_FILTER_EAGERNESS_ON\s0\fR(), \fB\s-1SG_FILTER_EAGERNESS_OFF\s0\fR"
+
+.IX Item "ATbool \fB\s-1SG_FILTER_INJECTIONCOUNT\s0\fR; \fB\s-1SG_FILTER_INJECTIONCOUNT_ON\s0\fR(), \fB\s-1SG_FILTER_INJECTIONCOUNT_OFF\s0\fR"
+
+.IX Item "ATbool \fB\s-1SG_FILTER_PRIORITY\s0\fR; \fB\s-1SG_FILTER_PRIORITY_ON\s0\fR(), \fB\s-1SG_FILTER_PRIORITY_OFF\s0\fR"
+
+.IX Item "ATbool \fB\s-1SG_FILTER_REJECT\s0\fR; \fB\s-1SG_FILTER_REJECT_ON\s0\fR(), \fB\s-1SG_FILTER_REJECT_OFF\s0\fR"
+
+.IX Header "DESCRIPTION"
+
+.IX Header "USAGE"
+
+.IX Subsection "\fB\s-1API\s0 Functions\fR"
+
+.IX Item "\fBSGinitParser\fR will make the parsing routines operate in default mode; \f(CWtoolbus_mode\fR determines whether or not to run as a ToolBus application."
+
+.IX Item "The \fBSGopenLanguageFromTerm\fR and \fBSGopenLanguage\fR functions make a language available.  The language is registered under the name of the \f(CWname\fR argument; it is available for later use (i.e. can be retrieved from the parse table database) by that name.  \fBSGopenLanguageFromTerm\fR uses the parse table, represented as an \f(CWATerm\fR, from the \f(CWtbl\fR argument; \fBSGopenLanguage\fR reads the parse table from the file that is named by the \f(CWtblfil\fR argument."
+
+.IX Item "The \fBSGgetTopSymbols\fR function returns the symbols that are defined as start symbols in the requested language."
+
+.IX Item "There are several ways of parsing an input term.  Assuming it does not contain \f(CWNULL\fR characters, it can be represented as a string. Such a string can then be parsed using the \fBSGparseString...\fR routines. The \f(CWlang\fR argument is a named language to parse the input term with; optionally, an explicit top sort to be produced by the parser can be specified using the \f(CWsort\fR argument.  The term to parse is contained as a string in \f(CWstr\fR.  The \fBAsAsFix2\fR and \fBAsAsFix1\fR variants can be used to obtain parse trees in AsFix2 and AsFix1 results, respectively; note that AsFix1 can contain parse trees only."
+
+.IX Item "File-based parsing is provided by the \fBSGparseFile\fR and \fBSGparseFileUsingTable\fR functions.  In both functions, \f(CWsort\fR -- again, optional -- specifies the top sort the parse must produce."
+
+.IX Item "After parsing, \fBSGtermToFile\fR writes the parse forest in \f(CWfrst\fR to the output file named \f(CWoutfil\fR."
+
+.IX Item "The boolean functions \fBSGisParseTree\fR and \fBSGisParseError\fR inspect an \f(CWATerm\fR and will return whether or not it contains a parsetree, resp. a parse error."
+
+.IX Subsection "\fBOperating Mode Macros\fR"
+
+.IX Item "\fB\s-1SG_VERBOSE\s0\fR indicates whether or not parsing is performed in verbose mode;  \fB\s-1SG_VERBOSE_ON\s0\fR() switches into and \fB\s-1SG_VERBOSE_OFF\s0\fR() out of verbose operating mode."
+
+.IX Item "With \fB\s-1SG_DEBUG\s0\fR on, debugging information is written to disk.  \fB\s-1SG_DEBUG_ON\s0\fR() enables and \fB\s-1SG_DEBUG_OFF\s0\fR() disables this."
+
+.IX Item "When using \fB\s-1SG_SHOWSTAT\s0\fR, some run-time statistics are collected.  It is switched on by \fB\s-1SG_SHOWSTAT_ON\s0\fR() and off by \fB\s-1SG_SHOWSTAT_OFF\s0\fR()."
+
+.IX Item "Unless \fB\s-1SG_OUTPUT\s0\fR is on (which it is by default) no output is generated.  In effect, a (fast) accepting/rejecting parser can be obtained by disabling output.  Switch it on using \fB\s-1SG_OUTPUT_ON\s0\fR(), off using \fB\s-1SG_OUTPUT_OFF\s0\fR()."
+
+.IX Item "If you set \fB\s-1SG_ASFIX1\s0\fR, the parse result will be represented in AsFix1 format, if possible.  By default, AsFix2 format is used.  \fB\s-1SG_ASFIX1_ON\s0\fR() and \fB\s-1SG_ASFIX1_OFF\s0\fR() perform the obvious task; for convenience, \fB\s-1SG_ASFIX2\s0\fR, \fB\s-1SG_ASFIX2_ON\s0\fR(), and \fB\s-1SG_ASFIX2_OFF\s0\fR() are also provided."
+
+.IX Item "\fB\s-1SG_BINARY\s0\fR determines whether terms are written in binary (shared) format, or in textual format when doing file I/O.  By default, the shared, binary format is used.  \fB\s-1SG_BINARY_ON\s0\fR() and \fB\s-1SG_BINARY_OFF\s0\fR() act as should be expected."
+
+.IX Item "The \fB\s-1SG_FILTER\s0\fR option determines whether or not the parser applies a few common disambiguation strategies: subtree preference filtering, multiset filtering, and injection count filtering.  By default, filtering is applied; use \fB\s-1SG_FILTER_ON\s0\fR() to enable, \fB\s-1SG_FILTER_OFF\s0\fR() to disable all filters. If filtering is enabled, each filter can be toggled specifically also. "
+
+.IX Header "EXAMPLES"
+
+.IX Header "SEE ALSO"
+
+.IX Header "KNOWN BUGS"
+
+.IX Header "AUTHOR"
+

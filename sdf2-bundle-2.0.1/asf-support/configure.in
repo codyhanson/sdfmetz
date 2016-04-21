@@ -1,0 +1,50 @@
+dnl $Id: configure.in,v 1.29 2003/10/08 11:19:22 markvdb Exp $
+
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(configure.in)
+AM_INIT_AUTOMAKE(asf-support, 1.2)
+
+ACLOCAL="${ACLOCAL} -I ."
+
+dnl Which compiler to use?
+AC_PROG_CC
+
+dnl Handle --with-cflags option
+AC_ARG_WITH(cflags,
+   [  --with-cflags=CFLAGS    standard options of c compiler],
+   CFLAGS=${withval},
+   if test "a${GCC}" = "ayes"; then
+     CFLAGS="-Wall -g -O2"
+   fi;
+)
+AC_SUBST(CFLAGS)
+
+dnl Check for required packages and perform version check when needed.
+
+dnl Require ATerm library
+AC_PACKAGE_REQUIRE(aterm, baffle,
+   [  --with-aterm=DIR        ATerm-library is in DIR])
+AC_SUBST(ATERM)
+
+dnl Require pt-support package
+AC_PACKAGE_REQUIRE(pt-support, unparsePT,
+   [  --with-pt-support=DIR   pt-support is in DIR])
+AC_SUBST(PT_SUPPORT)   
+
+dnl Our own version of libdir whose value is set dynamically
+AC_SUBST(INSTLIBDIR)
+INSTLIBDIR="$libdir"
+
+dnl Is ranlib needed on this system?
+AC_PROG_RANLIB
+AC_PATH_PROG(AR,ar,/usr/bin/ar)
+
+dnl What commands are needed to set the variable MAKE in Makefiles?
+AC_SET_MAKE
+
+dnl Which files need updating?
+AC_OUTPUT(
+  Makefile
+  lib/Makefile
+  utils/Makefile
+)

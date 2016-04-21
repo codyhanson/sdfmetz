@@ -1,0 +1,14 @@
+%%                       $Id: Flat.sdf,v 1.1 2000/12/14 13:27:55 markvdb Exp $
+definition
+
+module Main
+imports Layout
+exports
+  sorts Any
+  lexical syntax
+    ~[ ]*         ->  Any
+
+module Layout
+exports
+  lexical syntax
+                 ->  LAYOUT {reject}

@@ -1,0 +1,99 @@
+dnl $Id: configure.in,v 1.47 2003/10/08 11:15:41 markvdb Exp $
+
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(configure.in)
+AM_INIT_AUTOMAKE(pt-support, 1.0)
+
+ACLOCAL="${ACLOCAL} -I ."
+
+dnl {{{  Which compiler to use?
+AC_PROG_CC
+
+dnl }}}
+dnl {{{  Handle --with-cflags option
+AC_ARG_WITH(cflags,
+   [  --with-cflags=CFLAGS    standard options of c compiler],
+   CFLAGS=${withval},
+   if test "a${GCC}" = "ayes"; then
+     CFLAGS="-Wall -g -O2"
+   fi;
+)
+AC_SUBST(CFLAGS)
+
+dnl }}}
+
+dnl {{{  Require ATerm library
+AC_PACKAGE_REQUIRE(aterm, baffle,
+   [  --with-aterm=DIR        ATerm-library is in DIR])
+AC_SUBST(ATERM)
+
+dnl }}}
+dnl {{{  Require ToolBus library
+
+dnl Require ToolBus library
+AC_PACKAGE_REQUIRE(toolbuslib, toolbuslib-config,
+   [  --with-toolbuslib=DIR   ToolBus library is in DIR])
+AC_SUBST(TOOLBUSLIB)
+
+dnl }}}
+
+dnl {{{  Require socket/gethostname
+
+NOSOCKLIBS=$LIBS
+dnl {{{  check for socket in -lsun and -lsocket
+SOCKET_FOUND=no
+SOCKLIBS=
+AC_CHECK_LIB(sun,socket,[SOCKET_FOUND=yes;SOCKLIBS="-lsun"])
+if test ${SOCKET_FOUND} = no; then
+  AC_CHECK_LIB(socket, socket,[SOCKET_FOUND=yes;SOCKLIBS="-lsocket"])
+fi
+
+dnl }}}
+dnl {{{  check for gethostname in -lsun and -lsocket
+
+GHN_FOUND=no
+AC_CHECK_LIB(sun,gethostname,[GHN_FOUND=yes])
+if test ${GHN_FOUND} = no; then
+  AC_CHECK_LIB(nsl,gethostname,[GHN_FOUND=yes;SOCKLIBS="$SOCKLIBS -lnsl"])
+fi
+
+dnl }}}
+AC_SUBST(SOCKLIBS)
+LIBS=$NOSOCKLIBS
+
+dnl }}}
+dnl {{{  Is ranlib needed on this system?
+AC_PROG_RANLIB
+AC_PATH_PROG(AR,ar,/usr/bin/ar)
+
+dnl }}}
+
+dnl {{{  Our own version of libdir whose value is set dynamically
+AC_SUBST(INSTLIBDIR)
+INSTLIBDIR="$libdir"
+
+dnl }}}
+dnl {{{  What commands are needed to set the variable MAKE in Makefiles?
+AC_SET_MAKE
+
+dnl }}}
+
+dnl {{{  Which files need updating?
+AC_OUTPUT(
+  Makefile
+  libconversion/Makefile
+  libmept/Makefile
+  libptmept/Makefile
+  libasfix2/Makefile
+  test/Makefile
+  test/terms/Makefile
+  utils/Makefile
+  utils/implodePT/Makefile
+  utils/implodePT/test/Makefile
+  utils/implodePT/test/in/Makefile
+  utils/implodePT/test/out/Makefile
+  utils/implodePT/test/terms/Makefile
+  utils/implodePT/test/grammar/Makefile
+)
+
+dnl }}}

@@ -1,0 +1,18 @@
+package 
+identification
+   name=__PACKAGE__
+   version=__VERSION__
+   location=http://www.cwi.nl/projects/MetaEnv/__PACKAGE__
+   info=http://www.cwi.nl/projects/MetaEnv/__PACKAGE__
+   description='This package contains the largely generated library for
+                handling parsetrees over ASF syntax. The syntax of terms in
+                ASF is user-defined, so this library only contains the fixed
+                parts of the ASF syntax.'
+
+   keywords=meta-environment, asf, parsetree, library
+
+configuration interface
+
+requires
+  aterm		2.0.2
+  pt-support	1.0
