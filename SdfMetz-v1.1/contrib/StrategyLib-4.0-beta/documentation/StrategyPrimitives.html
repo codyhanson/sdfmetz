@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >StrategyPrimitives</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>StrategyPrimitives</FONT
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>class</SPAN
+		> Typeable t =&gt; <A HREF = "#t%3ATerm"
+		>Term</A
+		> t </TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>data</SPAN
+		> <A HREF = "#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>data</SPAN
+		> <A HREF = "#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AparaTP"
+		>paraTP</A
+		> :: Monad m =&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> t . t -&gt; m t) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AparaTU"
+		>paraTU</A
+		> :: Monad m =&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> t . t -&gt; m a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AapplyTP"
+		>applyTP</A
+		> :: (Monad m, <A HREF = "StrategyPrimitives.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; t -&gt; m t</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AapplyTU"
+		>applyTU</A
+		> :: (Monad m, <A HREF = "StrategyPrimitives.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; t -&gt; m a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AadhocTP"
+		>adhocTP</A
+		> :: (Monad m, <A HREF = "StrategyPrimitives.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; (t -&gt; m t) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AadhocTU"
+		>adhocTU</A
+		> :: (Monad m, <A HREF = "StrategyPrimitives.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; (t -&gt; m a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmsubstTP"
+		>msubstTP</A
+		> :: (Monad m, Monad m') =&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> t . m t -&gt; m' t) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m'</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmsubstTU"
+		>msubstTU</A
+		> :: (Monad m, Monad m') =&gt; (m a -&gt; m' a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m'</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AseqTP"
+		>seqTP</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AseqTU"
+		>seqTU</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3ApassTP"
+		>passTP</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; (a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3ApassTU"
+		>passTU</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; (a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> b m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> b m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AchoiceTP"
+		>choiceTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AchoiceTU"
+		>choiceTU</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AallTP"
+		>allTP</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AallTU"
+		>allTU</A
+		> :: Monad m =&gt; (a -&gt; a -&gt; a) -&gt; a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AallTU'"
+		>allTU'</A
+		> :: (Monad m, Monoid a) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AoneTP"
+		>oneTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AoneTU"
+		>oneTU</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AanyTP"
+		>anyTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AanyTU"
+		>anyTU</A
+		> :: MonadPlus m =&gt; (a -&gt; a -&gt; a) -&gt; a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AanyTU'"
+		>anyTU'</A
+		> :: (MonadPlus m, Monoid a) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AsomeTP"
+		>someTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AsomeTU"
+		>someTU</A
+		> :: MonadPlus m =&gt; (a -&gt; a -&gt; a) -&gt; a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AsomeTU'"
+		>someTU'</A
+		> :: (Monoid a, MonadPlus m) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AinjTP"
+		>injTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

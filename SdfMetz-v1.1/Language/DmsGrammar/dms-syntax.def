@@ -1,0 +1,50 @@
+
+
+definition
+
+module Main
+imports DmsSyntax
+
+
+module DmsSyntax
+   imports Syntax
+   exports sorts DmsSyntax
+   
+   context-free syntax
+   
+      DmsRule* -> DmsSyntax { cons("DmsSyntax") }
+      
+      DmsSymbol "=" Number ";"                    -> DmsRule { cons("Other") }
+      NonTerminal "=" DmsSymbol* ";" NonTerminal? -> DmsRule { cons("Rule") }
+      ">>" DmsSymbol                              -> DmsRule { cons("Disambiguation") }
+      
+      NonTerminal -> DmsSymbol { cons("DmsNonTerminal") }
+      Terminal    -> DmsSymbol { cons("DmsTerminal") }
+
+
+module Syntax
+   imports Layout
+   exports sorts Terminal NonTerminal
+   
+   lexical syntax
+      ":"[a-z0-9]+ -> Number
+      [a-zA-Z0-9\_]+ -> NonTerminal
+      "'" ( "\\'" | ~[\'\n])+ "'" -> Terminal
+      
+   context-free restrictions
+      NonTerminal -/- [a-zA-Z0-9\_]
+      Number -/- [0-9]
+
+      
+module Layout
+   exports
+     
+   lexical syntax
+      [\ \t\n\13] -> LAYOUT
+   
+   context-free restrictions
+      LAYOUT? -/- [\ \t\n\13]
+
+
+
+%% Structure and Interpretation of Computer programs - Abelson & Sussmem

@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >RefactoringTheme</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>RefactoringTheme</FONT
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>class</SPAN
+		> (<A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> abstr, Eq name, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> [abstr], <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> apply) =&gt; <A HREF = "#t%3AAbstraction"
+		>Abstraction</A
+		> abstr name tpe apply | abstr -&gt; name, abstr -&gt; tpe, abstr -&gt; apply, apply -&gt; name, apply -&gt; abstr <SPAN CLASS = "keyword"
+		>where</SPAN
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AgetAbstrName"
+		      >getAbstrName</A
+		      > :: abstr -&gt; Maybe name</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AgetAbstrParas"
+		      >getAbstrParas</A
+		      > :: abstr -&gt; Maybe [(name, tpe)]</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AgetAbstrBody"
+		      >getAbstrBody</A
+		      > :: abstr -&gt; Maybe apply</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AgetApplyName"
+		      >getApplyName</A
+		      > :: apply -&gt; Maybe name</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AgetApplyParas"
+		      >getApplyParas</A
+		      > :: apply -&gt; Maybe [(name, tpe)]</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AconstrAbstr"
+		      >constrAbstr</A
+		      > :: name -&gt; [(name, tpe)] -&gt; apply -&gt; Maybe abstr</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3AconstrApply"
+		      >constrApply</A
+		      > :: name -&gt; [(name, tpe)] -&gt; Maybe apply</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aeliminate"
+		>eliminate</A
+		> :: (<A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> prog, <A HREF = "RefactoringTheme.html#t%3AAbstraction"
+		>Abstraction</A
+		> abstr name tpe apply) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [(name, tpe)] Identity -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [name] Identity -&gt; (abstr -&gt; Maybe abstr) -&gt; prog -&gt; Maybe prog</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aintroduce"
+		>introduce</A
+		> :: (<A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> prog, <A HREF = "RefactoringTheme.html#t%3AAbstraction"
+		>Abstraction</A
+		> abstr name tpe apply) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [(name, tpe)] Identity -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [name] Identity -&gt; ([abstr] -&gt; Maybe [abstr]) -&gt; abstr -&gt; prog -&gt; Maybe prog</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aextract"
+		>extract</A
+		> :: (<A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> prog, <A HREF = "RefactoringTheme.html#t%3AAbstraction"
+		>Abstraction</A
+		> abstr name tpe apply) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [(name, tpe)] Identity -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [name] Identity -&gt; (apply -&gt; Maybe apply) -&gt; ([abstr] -&gt; [abstr]) -&gt; ([abstr] -&gt; Maybe [abstr]) -&gt; ([(name, tpe)] -&gt; apply -&gt; Bool) -&gt; name -&gt; prog -&gt; Maybe prog</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

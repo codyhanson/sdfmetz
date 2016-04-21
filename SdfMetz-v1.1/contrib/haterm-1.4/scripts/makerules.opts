@@ -1,0 +1,10 @@
+###############################################################################
+#
+# These are the options that will do for the examples in the distribution.
+#
+
+ghc-opts =	-package data
+
+hugs-opts =	-98 					\
+		+o 					\
+		+N

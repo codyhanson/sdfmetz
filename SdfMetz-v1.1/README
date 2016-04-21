@@ -1,0 +1,57 @@
+-------------------------------------------------------------------------------
+
+SdfMetz  -- SDF Monitor.
+
+SdfMetz computes metrics for SDF grammars. Among the supported metrics are 
+counters of terminals, non-terminals, productions, and disambiguation 
+constructs, McCabe's cyclometric complexity, and structure metrics such as tree 
+impurity and normalized count of grammar levels.
+
+-------------------------------------------------------------------------------
+
+USAGE
+
+Just type "SdfMetz -h" at the command line to receive an overview of the
+command line options.
+Due some restrictions, the tool can only be run in the folder where it is
+compiled.
+
+
+-------------------------------------------------------------------------------
+
+AUTHORS
+
+  Tiago Miguel Laureano Alves <tiago.alves@di.uminho.pt>
+  Joost Visser                <joost.visser@di.uminho.pt>
+
+-------------------------------------------------------------------------------
+
+COPYRIGHT
+
+  BSD
+
+-------------------------------------------------------------------------------
+
+REQUIREMENTS
+
+  To build from sources, you need:
+
+  - GHC                         tested with 6.2.2
+    http://www.haskell.org/ghc/
+    
+  - SDF2 Bundle                 tested with 2.0.1
+    http://www.program-transformation.org/Sdf/Sdf2BundleRelease201
+    
+  Note: Due to language changes (both in the SDF language and in the ghc
+        compiler) it is recomended to not use newer versions of the software
+        
+-------------------------------------------------------------------------------
+
+INSTALL
+
+ To install just do "make".
+ Two folders will be created with generated files "odir" with object files and
+ "hidir" with .hi (haskell interface) files. The SdfMetz executable will be
+ created in the current folder.
+
+-------------------------------------------------------------------------------

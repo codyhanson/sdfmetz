@@ -1,0 +1,6 @@
+- File .cvsignore still to be added to all directories.
+- Omitted some examples; more could still be added.
+- Module headers maybe need update.
+- Haddock documentation to be worked on.
+- GHC Data.Generics under construction.
+

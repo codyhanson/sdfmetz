@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >ContainerTheme</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>ContainerTheme</FONT
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amodify"
+		>modify</A
+		> :: Eq x =&gt; (x -&gt; y) -&gt; x -&gt; y -&gt; x -&gt; y</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmodifyTP"
+		>modifyTP</A
+		> :: (MonadPlus m, Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; t -&gt; m t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmodifyTU"
+		>modifyTU</A
+		> :: (MonadPlus m, Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; t -&gt; m a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>type</SPAN
+		> <A HREF = "#t%3AGSet"
+		>GSet</A
+		> = <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> () Maybe</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AemptyGSet"
+		>emptyGSet</A
+		> :: <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AfullGSet"
+		>fullGSet</A
+		> :: <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AaddGSet"
+		>addGSet</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		> -&gt; <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AremoveGSet"
+		>removeGSet</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		> -&gt; <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AcontainsGSet"
+		>containsGSet</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGSet"
+		>GSet</A
+		> -&gt; Bool</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>type</SPAN
+		> <A HREF = "#t%3AGMap"
+		>GMap</A
+		> value = <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> value Maybe</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AemptyGMap"
+		>emptyGMap</A
+		> :: <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AremoveGMap"
+		>removeGMap</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v -&gt; <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AcontainsGMap"
+		>containsGMap</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v -&gt; Bool</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AputGMap"
+		>putGMap</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; v -&gt; <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v -&gt; <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AgetGMap"
+		>getGMap</A
+		> :: (Eq t, <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t) =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGMap"
+		>GMap</A
+		> v -&gt; Maybe v</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>type</SPAN
+		> <A HREF = "#t%3AGList"
+		>GList</A
+		> = (Integer -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> Maybe, Integer)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AemptyGList"
+		>emptyGList</A
+		> :: <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AaddGList"
+		>addGList</A
+		> :: <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t =&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		> -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AputGList"
+		>putGList</A
+		> :: <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t =&gt; Integer -&gt; t -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		> -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AgetGList"
+		>getGList</A
+		> :: <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t =&gt; Integer -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		> -&gt; Maybe t</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmapGListTP"
+		>mapGListTP</A
+		> :: <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> Maybe -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		> -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmapGListTU"
+		>mapGListTU</A
+		> :: <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t =&gt; (t -&gt; ()) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a Maybe -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		> -&gt; [Maybe a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AelemsGList"
+		>elemsGList</A
+		> :: <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> t =&gt; (t -&gt; ()) -&gt; <A HREF = "ContainerTheme.html#t%3AGList"
+		>GList</A
+		> -&gt; [t]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Anth"
+		>nth</A
+		> :: [a] -&gt; Integer -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>type</SPAN
+		> <A HREF = "#t%3ACoder"
+		>Coder</A
+		> = (Int, <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> Int Maybe)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AnoCode"
+		>noCode</A
+		> :: <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AgetCode"
+		>getCode</A
+		> :: <A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> x =&gt; <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		> -&gt; x -&gt; Maybe Int</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AsetCode"
+		>setCode</A
+		> :: (<A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> x, Eq x) =&gt; <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		> -&gt; x -&gt; Int -&gt; <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AnextCode"
+		>nextCode</A
+		> :: <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		> -&gt; (Int, <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		>)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AenCode"
+		>enCode</A
+		> :: (<A HREF = "TermRep.html#t%3ATerm"
+		>Term</A
+		> x, Eq x) =&gt; <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		> -&gt; x -&gt; <A HREF = "ContainerTheme.html#t%3ACoder"
+		>Coder</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

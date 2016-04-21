@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >FixpointTheme</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>FixpointTheme</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    > portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    > experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    > Ralf Laemmel, Joost Visser</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "section4"
+	      ><B
+		>Contents</B
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD
+	      ><DL
+		><DT
+		  ><A HREF = "#1"
+		    >Fixpoint Iteration </A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#2"
+		    >Fixpoint Traversal </A
+		    ></DT
+		  ></DL
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>This module is part of StrategyLib, a library of functional strategy
+combinators, including combinators for generic traversal. This module 
+defines combinators that iterate until some kind of fixpoint is reached.
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3ArepeatTP"
+		>repeatTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Areduce"
+		>reduce</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aoutermost"
+		>outermost</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Ainnermost'"
+		>innermost'</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Ainnermost"
+		>innermost</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  >Fixpoint Iteration </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3ArepeatTP"
+	  ></A
+	  ><B
+	  >repeatTP</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Exhaustive repeated application at the root of the input term</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "2"
+	  >Fixpoint Traversal </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Areduce"
+	  ></A
+	  ><B
+	  >reduce</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Exhaustive repeated application throughout the input term.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aoutermost"
+	  ></A
+	  ><B
+	  >outermost</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Exhaustive repeated application according to the left-most
+outermost traversal strategy.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Ainnermost'"
+	  ></A
+	  ><B
+	  >innermost'</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Exhaustive repeated application according to the left-most
+innermost traversal strategy, implemented in a naive way.
+Use <TT
+	  ><A HREF = "FixpointTheme.html#v%3Ainnermost"
+	    >innermost</A
+	    ></TT
+	  > instead.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Ainnermost"
+	  ></A
+	  ><B
+	  >innermost</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Exhaustive repeated application according to the left-most
+innermost traversal strategy, implemented in a more 
+efficient way.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

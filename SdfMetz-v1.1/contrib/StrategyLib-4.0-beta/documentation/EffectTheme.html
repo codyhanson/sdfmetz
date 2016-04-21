@@ -1,0 +1,772 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >EffectTheme</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>EffectTheme</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    > portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    > experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    > Ralf Laemmel, Joost Visser</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "section4"
+	      ><B
+		>Contents</B
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD
+	      ><DL
+		><DT
+		  ><A HREF = "#1"
+		    >Replace one strategy monad by another</A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#2"
+		    >Add an effect to the strategy monad</A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#3"
+		    >Remove an effect from the strategy monad </A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#4"
+		    >Localize specific effects</A
+		    ></DT
+		  ><DD
+		  ><DL
+		    ><DT
+		      ><A HREF = "#5"
+			>Localize the partiality effect </A
+			></DT
+		      ><DT
+		      ><A HREF = "#6"
+			>Localize the state effect </A
+			></DT
+		      ></DL
+		    ></DD
+		  ></DL
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>This module is part of StrategyLib, a library of functional strategy
+combinators, including combinators for generic traversal. This module
+provides combinators to localize monadic effects.
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmrunTP"
+		>mrunTP</A
+		> :: (Monad m, Monad m', <A HREF = "MonadRun.html#t%3AMonadRun"
+		>MonadRun</A
+		> s m) =&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> a . s a a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m'</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AmrunTU"
+		>mrunTU</A
+		> :: (Monad m, Monad m', <A HREF = "MonadRun.html#t%3AMonadRun"
+		>MonadRun</A
+		> s m) =&gt; s a a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m'</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AliftTP"
+		>liftTP</A
+		> :: (Monad (t m), Monad m, MonadTrans t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> (t m)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AliftTU"
+		>liftTU</A
+		> :: (Monad (t m), Monad m, MonadTrans t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a (t m)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AunliftTP"
+		>unliftTP</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> s t) =&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> a . s a a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AunliftTU"
+		>unliftTU</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> s t) =&gt; s a a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AguaranteeSuccessTP"
+		>guaranteeSuccessTP</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> a . a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AguaranteeSuccessTU"
+		>guaranteeSuccessTU</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AunsafeGuaranteeSuccessTP"
+		>unsafeGuaranteeSuccessTP</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AlocalStateTP"
+		>localStateTP</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> (<A HREF = "MonadRun.html#t%3AStateAlg"
+		>StateAlg</A
+		> s) t) =&gt; s -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AlocalStateTU"
+		>localStateTU</A
+		> :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> (<A HREF = "MonadRun.html#t%3AStateAlg"
+		>StateAlg</A
+		> s) t) =&gt; s -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  >Replace one strategy monad by another</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AmrunTP"
+	  ></A
+	  ><B
+	  >mrunTP</B
+	  > :: (Monad m, Monad m', <A HREF = "MonadRun.html#t%3AMonadRun"
+	  >MonadRun</A
+	  > s m) =&gt; (<SPAN CLASS = "keyword"
+	  >forall</SPAN
+	  > a . s a a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m'</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Replace the monad in a type-preserving strategy, given a monad
+algebra (see <TT
+	  ><A HREF = "MonadRun.html#t%3AMonadRun"
+	    >MonadRun</A
+	    ></TT
+	  >) for the monad that is replaced. The two 
+monads are unrelated, so none of the effects in the monad that is
+replaced carry over to the one that replaces it.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AmrunTU"
+	  ></A
+	  ><B
+	  >mrunTU</B
+	  > :: (Monad m, Monad m', <A HREF = "MonadRun.html#t%3AMonadRun"
+	  >MonadRun</A
+	  > s m) =&gt; s a a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m'</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Replace the monad in a type-unifying strategy, given a monad
+algebra (see <TT
+	  ><A HREF = "MonadRun.html#t%3AMonadRun"
+	    >MonadRun</A
+	    ></TT
+	  >) for the monad that is replaced. The two 
+monads are unrelated, so none of the effects in the monad that is
+replaced carry over to the one that replaces it.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "2"
+	  >Add an effect to the strategy monad</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AliftTP"
+	  ></A
+	  ><B
+	  >liftTP</B
+	  > :: (Monad (t m), Monad m, MonadTrans t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > (t m)</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Add an effect to the monad in a type-preserving strategy. 
+The monads are related by a monad transformer, so the effects of the
+incoming monad are preserved in the result monad. We use the lift
+function of the monad transformer.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AliftTU"
+	  ></A
+	  ><B
+	  >liftTU</B
+	  > :: (Monad (t m), Monad m, MonadTrans t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a (t m)</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Add an effect to the monad in a type-unifying strategy. 
+The monads are related by a monad transformer, so the effects of the
+incoming monad are preserved in the result monad. We use the lift
+function of the monad transformer.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "3"
+	  >Remove an effect from the strategy monad </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AunliftTP"
+	  ></A
+	  ><B
+	  >unliftTP</B
+	  > :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > s t) =&gt; (<SPAN CLASS = "keyword"
+	  >forall</SPAN
+	  > a . s a a) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>remove an effect from the monad of a type-preserving strategy.
+The monads are related by a monad untransformer (see <TT
+	  ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	    >MonadUnTrans</A
+	    ></TT
+	  >),
+so the effects of the incoming monad are preserved in the result
+monad, except for the effect for which a monad algebra is supplied.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AunliftTU"
+	  ></A
+	  ><B
+	  >unliftTU</B
+	  > :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > s t) =&gt; s a a -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>remove an effect from the monad of a type-unifying strategy.
+The monads are related by a monad untransformer (see <TT
+	  ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	    >MonadUnTrans</A
+	    ></TT
+	  >),
+so the effects of the incoming monad are preserved in the result
+monad, except for the effect for which a monad algebra is supplied.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "4"
+	  >Localize specific effects</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "5"
+	  >Localize the partiality effect </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AguaranteeSuccessTP"
+	  ></A
+	  ><B
+	  >guaranteeSuccessTP</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; (<SPAN CLASS = "keyword"
+		>forall</SPAN
+		> a . a)</TD
+	      ><TD CLASS = "rdoc"
+	      >default value (Note: universally quantified!)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> (t m)</TD
+	      ><TD CLASS = "rdoc"
+	      >type-preserving partial strategy</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ><TD CLASS = "rdoc"
+	      >type-preserving strategy without partiality</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Localize the partiality effect in a type-preserving strategy. A
+default value must be supplied to be used to recover from
+failure. Since this default parameter is universally quantified,
+only undefined and 'error ...' can be used to instantiate it.
+See also 'unsafeGuaranteeSuccessTP.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AguaranteeSuccessTU"
+	  ></A
+	  ><B
+	  >guaranteeSuccessTU</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      >default value</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a (t m)</TD
+	      ><TD CLASS = "rdoc"
+	      >type-preserving partial strategy</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ><TD CLASS = "rdoc"
+	      >type-preserving strategy without partiality</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Localize the partiality effect in a type-unifying strategy. A
+default value must be supplied to be used to recover from
+failure. </TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AunsafeGuaranteeSuccessTP"
+	  ></A
+	  ><B
+	  >unsafeGuaranteeSuccessTP</B
+	  > :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Unsafe version of <TT
+	  ><A HREF = "EffectTheme.html#v%3AguaranteeSuccessTP"
+	    >guaranteeSuccessTP</A
+	    ></TT
+	  >. This version uses uses undefined
+to recover from failure. For the type-preserving case, this is the only
+possible default value.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "6"
+	  >Localize the state effect </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AlocalStateTP"
+	  ></A
+	  ><B
+	  >localStateTP</B
+	  > :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > (<A HREF = "MonadRun.html#t%3AStateAlg"
+	  >StateAlg</A
+	  > s) t) =&gt; s -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Localize the state of a type-preserving strategy. The first argument
+represents the initial state.  </TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AlocalStateTU"
+	  ></A
+	  ><B
+	  >localStateTU</B
+	  > :: (Monad (t m), Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > (<A HREF = "MonadRun.html#t%3AStateAlg"
+	  >StateAlg</A
+	  > s) t) =&gt; s -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a (t m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Localize the state of a type-unifying strategy. The first argument
+represents the initial state.  </TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

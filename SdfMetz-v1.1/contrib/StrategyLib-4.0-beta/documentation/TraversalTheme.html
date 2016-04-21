@@ -1,0 +1,1254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >TraversalTheme</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>TraversalTheme</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    > portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    > experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    > Ralf Laemmel, Joost Visser</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "section4"
+	      ><B
+		>Contents</B
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD
+	      ><DL
+		><DT
+		  ><A HREF = "#1"
+		    >Recursive traversal</A
+		    ></DT
+		  ><DD
+		  ><DL
+		    ><DT
+		      ><A HREF = "#2"
+			>Full traversals</A
+			></DT
+		      ><DT
+		      ><A HREF = "#3"
+			>Traversals with stop conditions </A
+			></DT
+		      ><DT
+		      ><A HREF = "#4"
+			>Single hit traversal </A
+			></DT
+		      ><DT
+		      ><A HREF = "#5"
+			>Traversal with environment propagation</A
+			></DT
+		      ></DL
+		    ></DD
+		  ><DT
+		  ><A HREF = "#6"
+		    >One-layer traversal</A
+		    ></DT
+		  ><DD
+		  ><DL
+		    ><DT
+		      ><A HREF = "#7"
+			>Defined versions of some primitive one-layer traversal combinators</A
+			></DT
+		      ><DT
+		      ><A HREF = "#8"
+			>Recursive completion of one-layer traversal </A
+			></DT
+		      ></DL
+		    ></DD
+		  ><DT
+		  ><A HREF = "#9"
+		    >Overloading and synonyms</A
+		    ></DT
+		  ><DD
+		  ><DL
+		    ><DT
+		      ><A HREF = "#10"
+			>Overloaded schemes for traversal </A
+			></DT
+		      ><DT
+		      ><A HREF = "#11"
+			>Some synonyms for convenience </A
+			></DT
+		      ></DL
+		    ></DD
+		  ></DL
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>This module is part of StrategyLib, a library of functional strategy
+combinators, including combinators for generic traversal. This module defines
+traversal schemes. Such schemes have formed the core of StrategyLib
+since its first release. The portfolio as it stands now captures part
+of the design in the paper <A HREF = "... Polymorphic Symphony.html"
+	  >... Polymorphic Symphony</A
+	  >.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Afull_tdTP"
+		>full_tdTP</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Afull_buTP"
+		>full_buTP</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Afull_tdTU"
+		>full_tdTU</A
+		> :: (Monad m, Monoid a) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Astop_tdTP"
+		>stop_tdTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Astop_tdTU"
+		>stop_tdTU</A
+		> :: (MonadPlus m, Monoid a) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_tdTP"
+		>once_tdTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_tdTU"
+		>once_tdTU</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_buTP"
+		>once_buTP</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_buTU"
+		>once_buTU</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_peTU"
+		>once_peTU</A
+		> :: MonadPlus m =&gt; e -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> e m) -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AanyTP'"
+		>anyTP'</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AsomeTP'"
+		>someTP'</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aall_recTU"
+		>all_recTU</A
+		> :: (Monoid a, Monad m) =&gt; (t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m) -&gt; t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aone_recTU"
+		>one_recTU</A
+		> :: MonadPlus m =&gt; (t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m) -&gt; t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Afull_td"
+		>full_td</A
+		> :: <A HREF = "OverloadingTheme.html#t%3AStrategyMonoid"
+		>StrategyMonoid</A
+		> s m =&gt; s m -&gt; s m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_td"
+		>once_td</A
+		> :: <A HREF = "OverloadingTheme.html#t%3AStrategyPlus"
+		>StrategyPlus</A
+		> s m =&gt; s m -&gt; s m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_bu"
+		>once_bu</A
+		> :: <A HREF = "OverloadingTheme.html#t%3AStrategyPlus"
+		>StrategyPlus</A
+		> s m =&gt; s m -&gt; s m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aonce_pe"
+		>once_pe</A
+		> :: <A HREF = "OverloadingTheme.html#t%3AStrategyPlus"
+		>StrategyPlus</A
+		> s m =&gt; (e -&gt; s m) -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> e m) -&gt; e -&gt; s m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Atopdown"
+		>topdown</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+		>TP</A
+		> m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Acrush"
+		>crush</A
+		> :: (Monad m, Monoid u) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> u m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> u m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Acollect"
+		>collect</A
+		> :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [a] m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> [a] m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aselect"
+		>select</A
+		> :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> u m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> u m</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Aselectenv"
+		>selectenv</A
+		> :: MonadPlus m =&gt; e -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> e m) -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  >Recursive traversal</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "2"
+	  >Full traversals</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Afull_tdTP"
+	  ></A
+	  ><B
+	  >full_tdTP</B
+	  > :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Full type-preserving traversal in top-down order.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Afull_buTP"
+	  ></A
+	  ><B
+	  >full_buTP</B
+	  > :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Full type-preserving traversal in bottom-up order.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Afull_tdTU"
+	  ></A
+	  ><B
+	  >full_tdTU</B
+	  > :: (Monad m, Monoid a) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Full type-unifying traversal in top-down order.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "3"
+	  >Traversals with stop conditions </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Astop_tdTP"
+	  ></A
+	  ><B
+	  >stop_tdTP</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Top-down type-preserving traversal that is cut of below nodes
+where the argument strategy succeeds.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Astop_tdTU"
+	  ></A
+	  ><B
+	  >stop_tdTU</B
+	  > :: (MonadPlus m, Monoid a) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Top-down type-unifying traversal that is cut of below nodes
+where the argument strategy succeeds.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "4"
+	  >Single hit traversal </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_tdTP"
+	  ></A
+	  ><B
+	  >once_tdTP</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Top-down type-preserving traversal that performs its argument
+strategy at most once.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_tdTU"
+	  ></A
+	  ><B
+	  >once_tdTU</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Top-down type-unifying traversal that performs its argument
+strategy at most once.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_buTP"
+	  ></A
+	  ><B
+	  >once_buTP</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Bottom-up type-preserving traversal that performs its argument
+strategy at most once.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_buTU"
+	  ></A
+	  ><B
+	  >once_buTU</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Bottom-up type-unifying traversal that performs its argument
+strategy at most once.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "5"
+	  >Traversal with environment propagation</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_peTU"
+	  ></A
+	  ><B
+	  >once_peTU</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: MonadPlus m</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; e</TD
+	      ><TD CLASS = "rdoc"
+	      >initial environment</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> e m)</TD
+	      ><TD CLASS = "rdoc"
+	      >environment modification at downward step</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m)</TD
+	      ><TD CLASS = "rdoc"
+	      >extraction of value, dependent on environment</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Top-down type-unifying traversal with propagation of an environment.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "6"
+	  >One-layer traversal</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "7"
+	  >Defined versions of some primitive one-layer traversal combinators</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AanyTP'"
+	  ></A
+	  ><B
+	  >anyTP'</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Use <TT
+	  ><A HREF = "StrategyPrimitives.html#v%3AanyTP"
+	    >anyTP</A
+	    ></TT
+	  > instead.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AsomeTP'"
+	  ></A
+	  ><B
+	  >someTP'</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Use <TT
+	  ><A HREF = "StrategyPrimitives.html#v%3AsomeTP"
+	    >someTP</A
+	    ></TT
+	  > instead.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "8"
+	  >Recursive completion of one-layer traversal </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aall_recTU"
+	  ></A
+	  ><B
+	  >all_recTU</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Monoid a, Monad m)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; (t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m)</TD
+	      ><TD CLASS = "rdoc"
+	      >binary strategy combinator</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; t</TD
+	      ><TD CLASS = "rdoc"
+	      >argument strategy</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ><TD CLASS = "rdoc"
+	      >result strategy</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Recursive completion of full type-preserving one-layer traverasal</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aone_recTU"
+	  ></A
+	  ><B
+	  >one_recTU</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: MonadPlus m</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; (t -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m)</TD
+	      ><TD CLASS = "rdoc"
+	      >binary strategy combinator</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; t</TD
+	      ><TD CLASS = "rdoc"
+	      >argument strategy</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+		>TU</A
+		> a m</TD
+	      ><TD CLASS = "rdoc"
+	      >result strategy</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Recursive completion of type-preserving one-layer traversal that
+succeeds exactly once.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "9"
+	  >Overloading and synonyms</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "10"
+	  >Overloaded schemes for traversal </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Afull_td"
+	  ></A
+	  ><B
+	  >full_td</B
+	  > :: <A HREF = "OverloadingTheme.html#t%3AStrategyMonoid"
+	  >StrategyMonoid</A
+	  > s m =&gt; s m -&gt; s m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Full top-down traversal (overloaded between <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATU"
+	    >TU</A
+	    ></TT
+	  > and <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATP"
+	    >TP</A
+	    ></TT
+	  >).</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_td"
+	  ></A
+	  ><B
+	  >once_td</B
+	  > :: <A HREF = "OverloadingTheme.html#t%3AStrategyPlus"
+	  >StrategyPlus</A
+	  > s m =&gt; s m -&gt; s m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>One-hit top-down traversal (overloaded between <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATU"
+	    >TU</A
+	    ></TT
+	  > and <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATP"
+	    >TP</A
+	    ></TT
+	  >).</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_bu"
+	  ></A
+	  ><B
+	  >once_bu</B
+	  > :: <A HREF = "OverloadingTheme.html#t%3AStrategyPlus"
+	  >StrategyPlus</A
+	  > s m =&gt; s m -&gt; s m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>One-hit bottom-up traversal (overloaded between <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATU"
+	    >TU</A
+	    ></TT
+	  > and <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATP"
+	    >TP</A
+	    ></TT
+	  >).</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aonce_pe"
+	  ></A
+	  ><B
+	  >once_pe</B
+	  > :: <A HREF = "OverloadingTheme.html#t%3AStrategyPlus"
+	  >StrategyPlus</A
+	  > s m =&gt; (e -&gt; s m) -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > e m) -&gt; e -&gt; s m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>One-hit top-down traversal with environment propagation 
+(overloaded between <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATU"
+	    >TU</A
+	    ></TT
+	  > and <TT
+	  ><A HREF = "StrategyPrimitives.html#t%3ATP"
+	    >TP</A
+	    ></TT
+	  >).</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "11"
+	  >Some synonyms for convenience </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Atopdown"
+	  ></A
+	  ><B
+	  >topdown</B
+	  > :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATP"
+	  >TP</A
+	  > m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>See <TT
+	  ><A HREF = "TraversalTheme.html#v%3Afull_tdTP"
+	    >full_tdTP</A
+	    ></TT
+	  >.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Acrush"
+	  ></A
+	  ><B
+	  >crush</B
+	  > :: (Monad m, Monoid u) =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > u m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > u m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>See <TT
+	  ><A HREF = "TraversalTheme.html#v%3Afull_tdTU"
+	    >full_tdTU</A
+	    ></TT
+	  >.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Acollect"
+	  ></A
+	  ><B
+	  >collect</B
+	  > :: Monad m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > [a] m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > [a] m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Type-specialised version of <TT
+	  ><A HREF = "TraversalTheme.html#v%3Acrush"
+	    >crush</A
+	    ></TT
+	  >, which works with lists instead of
+any arbitrary monoid.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aselect"
+	  ></A
+	  ><B
+	  >select</B
+	  > :: MonadPlus m =&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > u m -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > u m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>See <TT
+	  ><A HREF = "TraversalTheme.html#v%3Aonce_tdTU"
+	    >once_tdTU</A
+	    ></TT
+	  >.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Aselectenv"
+	  ></A
+	  ><B
+	  >selectenv</B
+	  > :: MonadPlus m =&gt; e -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > e m) -&gt; (e -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m) -&gt; <A HREF = "StrategyPrimitives.html#t%3ATU"
+	  >TU</A
+	  > a m</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>See <TT
+	  ><A HREF = "TraversalTheme.html#v%3Aonce_peTU"
+	    >once_peTU</A
+	    ></TT
+	  >.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

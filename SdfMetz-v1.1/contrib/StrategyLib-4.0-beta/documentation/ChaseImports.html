@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >ChaseImports</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>ChaseImports</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    > portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    > experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    > Ralf Laemmel, Joost Visser</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "section4"
+	      ><B
+		>Contents</B
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD
+	      ><DL
+		><DT
+		  ><A HREF = "#1"
+		    >Type synonym</A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#2"
+		    >Generic import chasing</A
+		    ></DT
+		  ></DL
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>This module is part of StrategyLib, a library of functional strategy
+combinators, including combinators for generic traversal. This module
+defines a generic algorithm for import chasing. This algorithm is not
+strategic in nature itself, but usually it will be instantiated with
+strategic functions for a particular object language.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>type</SPAN
+		> <A HREF = "#t%3AChaseName"
+		>ChaseName</A
+		> = String</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AchaseWith"
+		>chaseWith</A
+		> :: [FilePath] -&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>] -&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>] -&gt; accu -&gt; ([FilePath] -&gt; <A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		> -&gt; IO (Either cu String)) -&gt; (cu -&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>]) -&gt; (<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		> -&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>] -&gt; cu -&gt; accu -&gt; IO accu) -&gt; (<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		> -&gt; accu -&gt; IO accu) -&gt; IO accu</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3AchaseFile"
+		>chaseFile</A
+		> :: [FilePath] -&gt; String -&gt; [String] -&gt; IO String</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  >Type synonym</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >type</SPAN
+	  > <A NAME = "t%3AChaseName"
+	  ></A
+	  ><B
+	  >ChaseName</B
+	  > = String</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>The type of names of chaseable things. Synonym of String.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "2"
+	  >Generic import chasing</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AchaseWith"
+	  ></A
+	  ><B
+	  >chaseWith</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: [FilePath]</TD
+	      ><TD CLASS = "rdoc"
+	      >path (list of directories to search)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>]</TD
+	      ><TD CLASS = "rdoc"
+	      >todo (list of modules still to find)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>]</TD
+	      ><TD CLASS = "rdoc"
+	      >done (list of modules already found)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; accu</TD
+	      ><TD CLASS = "rdoc"
+	      >initial (start value of accumulator)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; ([FilePath] -&gt; <A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		> -&gt; IO (Either cu String))</TD
+	      ><TD CLASS = "rdoc"
+	      >parse (function that attempt to find and parse a module)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; (cu -&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>])</TD
+	      ><TD CLASS = "rdoc"
+	      >imports (function that extracts imports from
+a parse result)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; (<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		> -&gt; [<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		>] -&gt; cu -&gt; accu -&gt; IO accu)</TD
+	      ><TD CLASS = "rdoc"
+	      >on module (function that computes a new
+accumulator from a parse result)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; (<A HREF = "ChaseImports.html#t%3AChaseName"
+		>ChaseName</A
+		> -&gt; accu -&gt; IO accu)</TD
+	      ><TD CLASS = "rdoc"
+	      >on missing (function that computes a new
+accumulator value when parsing failed)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; IO accu</TD
+	      ><TD CLASS = "rdoc"
+	      >result (accumulated value)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >A generic import chasing function. The type of the final result is a
+parameter, which will usually be instantiated to a list of parsed
+modules.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3AchaseFile"
+	  ></A
+	  ><B
+	  >chaseFile</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: [FilePath]</TD
+	      ><TD CLASS = "rdoc"
+	      >path (directories to search)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; String</TD
+	      ><TD CLASS = "rdoc"
+	      >base name</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [String]</TD
+	      ><TD CLASS = "rdoc"
+	      >possible extensions</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; IO String</TD
+	      ><TD CLASS = "rdoc"
+	      >contents of file</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Read a file from a number of possible directories, given a
+base name and a list of possible extensions.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

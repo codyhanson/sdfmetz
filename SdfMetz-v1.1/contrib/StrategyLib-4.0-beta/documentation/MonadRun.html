@@ -1,0 +1,1381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >MonadRun</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >StrategyLib</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>MonadRun</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    > portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    > experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    > Ralf Laemmel, Joost Visser</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "section4"
+	      ><B
+		>Contents</B
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD
+	      ><DL
+		><DT
+		  ><A HREF = "#1"
+		    >Monad algebras</A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#2"
+		    >Running monads</A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#3"
+		    >Unlifting monad transformers </A
+		    ></DT
+		  ><DT
+		  ><A HREF = "#4"
+		    >Monadic choice combinators that confine the partiality effect</A
+		    ></DT
+		  ><DD
+		  ><DL
+		    ><DT
+		      ><A HREF = "#5"
+			>Monadic choice</A
+			></DT
+		      ><DT
+		      ><A HREF = "#6"
+			>Monadic function choice</A
+			></DT
+		      ><DT
+		      ><A HREF = "#7"
+			>Implementation variants</A
+			></DT
+		      ></DL
+		    ></DD
+		  ></DL
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>This module is part of StrategyLib, a library of functional strategy
+combinators, including combinators for generic traversal. This module 
+provides non-strategic functionality for running monads and unlifting
+monad transformers. In a sense, this is dual to the return and lift
+functionality of the Monad and MonadTrans classes.
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>data</SPAN
+		> <A HREF = "#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> a b = <A HREF = "#v%3AMaybeAlg"
+		>MaybeAlg</A
+		> {<TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Anothing"
+		      >nothing</A
+		      > :: b</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Ajust"
+		      >just</A
+		      > :: (a -&gt; b)</TD
+		    ></TR
+		  ></TABLE
+		>}</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>data</SPAN
+		> <A HREF = "#t%3AErrorAlg"
+		>ErrorAlg</A
+		> e a b = <A HREF = "#v%3AErrorAlg"
+		>ErrorAlg</A
+		> {<TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Aleft"
+		      >left</A
+		      > :: (e -&gt; b)</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Aright"
+		      >right</A
+		      > :: (a -&gt; b)</TD
+		    ></TR
+		  ></TABLE
+		>}</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>data</SPAN
+		> <A HREF = "#t%3AListAlg"
+		>ListAlg</A
+		> a b = <A HREF = "#v%3AListAlg"
+		>ListAlg</A
+		> {<TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Anil"
+		      >nil</A
+		      > :: b</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Acons"
+		      >cons</A
+		      > :: (a -&gt; b -&gt; b)</TD
+		    ></TR
+		  ></TABLE
+		>}</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>data</SPAN
+		> <A HREF = "#t%3AStateAlg"
+		>StateAlg</A
+		> s a b = <A HREF = "#v%3AStateAlg"
+		>StateAlg</A
+		> {<TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Afirst"
+		      >first</A
+		      > :: s</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "recfield"
+		    ><A HREF = "#v%3Anext"
+		      >next</A
+		      > :: ((a, s) -&gt; b)</TD
+		    ></TR
+		  ></TABLE
+		>}</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>class</SPAN
+		> <A HREF = "#t%3AMonadRun"
+		>MonadRun</A
+		> s m | m -&gt; s <SPAN CLASS = "keyword"
+		>where</SPAN
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3Arun"
+		      >run</A
+		      > :: s a b -&gt; m a -&gt; b</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amrun"
+		>mrun</A
+		> :: (<A HREF = "MonadRun.html#t%3AMonadRun"
+		>MonadRun</A
+		> s m, Monad m') =&gt; s a b -&gt; m a -&gt; m' b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><SPAN CLASS = "keyword"
+		>class</SPAN
+		> <A HREF = "#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> s t | t -&gt; s <SPAN CLASS = "keyword"
+		>where</SPAN
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "#v%3Aunlift"
+		      >unlift</A
+		      > :: Monad m =&gt; s a b -&gt; t m a -&gt; m b</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amplus'"
+		>mplus'</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; t m b -&gt; m b -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amswitch"
+		>mswitch</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amayswitch"
+		>mayswitch</A
+		> :: Monad m =&gt; [<A HREF = "MonadMaybe.html#t%3AMaybeT"
+		>MaybeT</A
+		> m b] -&gt; m b -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amchoice'"
+		>mchoice'</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; (a -&gt; t m b) -&gt; (a -&gt; m b) -&gt; a -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amchoices"
+		>mchoices</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t, MonadPlus (t m)) =&gt; [a -&gt; t m b] -&gt; (a -&gt; m b) -&gt; a -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amswitch0"
+		>mswitch0</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amswitch1"
+		>mswitch1</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#v%3Amswitch'"
+		>mswitch'</A
+		> :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t, MonadPlus (t m)) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  >Monad algebras</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >data</SPAN
+	  > <A NAME = "t%3AMaybeAlg"
+	  ></A
+	  ><B
+	  >MaybeAlg</B
+	  > a b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "ndoc"
+	      >The algebra for the partiality effect of Maybe and <TT
+		><A HREF = "MonadMaybe.html#t%3AMaybeT"
+		  >MaybeT</A
+		  ></TT
+		>.</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Constructors</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "5" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A NAME = "v%3AMaybeAlg"
+		      ></A
+		      ><B
+		      >MaybeAlg</B
+		      ></TD
+		    ><TD CLASS = "rdoc"
+		    ></TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "body" COLSPAN = "2"
+		    ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		      ><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Anothing"
+			    ></A
+			    ><B
+			    >nothing</B
+			    > :: b</TD
+			  ><TD CLASS = "rdoc"
+			  ></TD
+			  ></TR
+			><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Ajust"
+			    ></A
+			    ><B
+			    >just</B
+			    > :: (a -&gt; b)</TD
+			  ><TD CLASS = "rdoc"
+			  ></TD
+			  ></TR
+			></TABLE
+		      ></TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Instances</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		      >MaybeAlg</A
+		      > Maybe</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		      >MaybeAlg</A
+		      > <A HREF = "MonadMaybe.html#t%3AMaybeT"
+		      >MaybeT</A
+		      ></TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >data</SPAN
+	  > <A NAME = "t%3AErrorAlg"
+	  ></A
+	  ><B
+	  >ErrorAlg</B
+	  > e a b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "ndoc"
+	      >The algebra for the error effect of Either and ErrorT.</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Constructors</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "5" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A NAME = "v%3AErrorAlg"
+		      ></A
+		      ><B
+		      >ErrorAlg</B
+		      ></TD
+		    ><TD CLASS = "rdoc"
+		    ></TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "body" COLSPAN = "2"
+		    ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		      ><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Aleft"
+			    ></A
+			    ><B
+			    >left</B
+			    > :: (e -&gt; b)</TD
+			  ><TD CLASS = "rdoc"
+			  ></TD
+			  ></TR
+			><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Aright"
+			    ></A
+			    ><B
+			    >right</B
+			    > :: (a -&gt; b)</TD
+			  ><TD CLASS = "rdoc"
+			  ></TD
+			  ></TR
+			></TABLE
+		      ></TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Instances</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > (<A HREF = "MonadRun.html#t%3AErrorAlg"
+		      >ErrorAlg</A
+		      > e) (Either e)</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > (<A HREF = "MonadRun.html#t%3AErrorAlg"
+		      >ErrorAlg</A
+		      > e) (ErrorT e)</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >data</SPAN
+	  > <A NAME = "t%3AListAlg"
+	  ></A
+	  ><B
+	  >ListAlg</B
+	  > a b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "ndoc"
+	      >The algebra for the non-determinacy effect of '[]' and ListT.</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Constructors</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "5" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A NAME = "v%3AListAlg"
+		      ></A
+		      ><B
+		      >ListAlg</B
+		      ></TD
+		    ><TD CLASS = "rdoc"
+		    ></TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "body" COLSPAN = "2"
+		    ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		      ><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Anil"
+			    ></A
+			    ><B
+			    >nil</B
+			    > :: b</TD
+			  ><TD CLASS = "rdoc"
+			  ></TD
+			  ></TR
+			><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Acons"
+			    ></A
+			    ><B
+			    >cons</B
+			    > :: (a -&gt; b -&gt; b)</TD
+			  ><TD CLASS = "rdoc"
+			  ></TD
+			  ></TR
+			></TABLE
+		      ></TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Instances</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > <A HREF = "MonadRun.html#t%3AListAlg"
+		      >ListAlg</A
+		      > []</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > <A HREF = "MonadRun.html#t%3AListAlg"
+		      >ListAlg</A
+		      > ListT</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >data</SPAN
+	  > <A NAME = "t%3AStateAlg"
+	  ></A
+	  ><B
+	  >StateAlg</B
+	  > s a b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "ndoc"
+	      >The algebra for the state effect of State and StateT.</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Constructors</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "5" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A NAME = "v%3AStateAlg"
+		      ></A
+		      ><B
+		      >StateAlg</B
+		      ></TD
+		    ><TD CLASS = "rdoc"
+		    ></TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "body" COLSPAN = "2"
+		    ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		      ><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Afirst"
+			    ></A
+			    ><B
+			    >first</B
+			    > :: s</TD
+			  ><TD CLASS = "rdoc"
+			  >initial state</TD
+			  ></TR
+			><TR
+			><TD CLASS = "decl"
+			  ><A NAME = "v%3Anext"
+			    ></A
+			    ><B
+			    >next</B
+			    > :: ((a, s) -&gt; b)</TD
+			  ><TD CLASS = "rdoc"
+			  >state transformer</TD
+			  ></TR
+			></TABLE
+		      ></TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Instances</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > (<A HREF = "MonadRun.html#t%3AStateAlg"
+		      >StateAlg</A
+		      > s) (State s)</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > (<A HREF = "MonadRun.html#t%3AStateAlg"
+		      >StateAlg</A
+		      > s) (StateT s)</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "2"
+	  >Running monads</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >class</SPAN
+	  > <A NAME = "t%3AMonadRun"
+	  ></A
+	  ><B
+	  >MonadRun</B
+	  > s m | m -&gt; s <SPAN CLASS = "keyword"
+	  >where</SPAN
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "ndoc"
+	      >The class of monads for which a <TT
+		><A HREF = "MonadRun.html#v%3Arun"
+		  >run</A
+		  ></TT
+		> function is defined that
+executes the computation of the monad.</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Methods</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A NAME = "v%3Arun"
+		      ></A
+		      ><B
+		      >run</B
+		      > :: s a b -&gt; m a -&gt; b</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "doc"
+		    >The overloaded function run takes as first argument an <A HREF = "algebra.html"
+		      >algebra</A
+		      > which
+captures the ingredients necessary to run the particular monad at hand.
+This algebra is parameterized with the domain and co-domain of run.</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Instances</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > (-&gt;) Identity</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		      >MaybeAlg</A
+		      > Maybe</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > (<A HREF = "MonadRun.html#t%3AErrorAlg"
+		      >ErrorAlg</A
+		      > e) (Either e)</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > <A HREF = "MonadRun.html#t%3AListAlg"
+		      >ListAlg</A
+		      > []</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > (<A HREF = "MonadRun.html#t%3AStateAlg"
+		      >StateAlg</A
+		      > s) (State s)</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadRun"
+		      >MonadRun</A
+		      > (-&gt;) IO</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amrun"
+	  ></A
+	  ><B
+	  >mrun</B
+	  > :: (<A HREF = "MonadRun.html#t%3AMonadRun"
+	  >MonadRun</A
+	  > s m, Monad m') =&gt; s a b -&gt; m a -&gt; m' b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Exchange one monad by another.
+This function runs one monad, and puts its value in another. This is
+basically a monadic version of the <TT
+	  ><A HREF = "MonadRun.html#v%3Arun"
+	    >run</A
+	    ></TT
+	  > function itself. Note that the two
+monads are unrelated, so none of the effects of the incoming monad are
+transferred to the result monad.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "3"
+	  >Unlifting monad transformers </A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><SPAN CLASS = "keyword"
+	  >class</SPAN
+	  > <A NAME = "t%3AMonadUnTrans"
+	  ></A
+	  ><B
+	  >MonadUnTrans</B
+	  > s t | t -&gt; s <SPAN CLASS = "keyword"
+	  >where</SPAN
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "ndoc"
+	      >Just as a base monad can be run to remove the monad, so can a transformed
+monad be unlifted to remove the transformer and obtain the original monad.</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Methods</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A NAME = "v%3Aunlift"
+		      ></A
+		      ><B
+		      >unlift</B
+		      > :: Monad m =&gt; s a b -&gt; t m a -&gt; m b</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "doc"
+		    >The overloaded function <TT
+		      ><A HREF = "MonadRun.html#v%3Aunlift"
+			>unlift</A
+			></TT
+		      > for monad transformers takes as first 
+argument an <A HREF = "algebra.html"
+		      >algebra</A
+		      > just like the run function for base monads. For
+each monad transformer, the same algebra is used as for the base monad
+of which the transformer is the parameterized variant.</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "section4"
+	      >Instances</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "body"
+	      ><TABLE CLASS = "vanilla" CELLSPACING = "1" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > <A HREF = "MonadRun.html#t%3AListAlg"
+		      >ListAlg</A
+		      > ListT</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		      >MaybeAlg</A
+		      > <A HREF = "MonadMaybe.html#t%3AMaybeT"
+		      >MaybeT</A
+		      ></TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > (<A HREF = "MonadRun.html#t%3AErrorAlg"
+		      >ErrorAlg</A
+		      > e) (ErrorT e)</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "decl"
+		    ><A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		      >MonadUnTrans</A
+		      > (<A HREF = "MonadRun.html#t%3AStateAlg"
+		      >StateAlg</A
+		      > s) (StateT s)</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "4"
+	  >Monadic choice combinators that confine the partiality effect</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "5"
+	  >Monadic choice</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amplus'"
+	  ></A
+	  ><B
+	  >mplus'</B
+	  > :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t) =&gt; t m b -&gt; m b -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Monadic choice combinator that confines the partiality effect to
+the first argument. This is a variation on mplus which allows
+the partiality effect to spread to both arguments and to the result.	  </TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amswitch"
+	  ></A
+	  ><B
+	  >mswitch</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+		>MonadUnTrans</A
+		> <A HREF = "MonadRun.html#t%3AMaybeAlg"
+		>MaybeAlg</A
+		> t)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; [t m b]</TD
+	      ><TD CLASS = "rdoc"
+	      >choice branches</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; m b</TD
+	      ><TD CLASS = "rdoc"
+	      >otherwise</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; m b</TD
+	      ><TD CLASS = "rdoc"
+	      >result</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      >Monadic choice combinator. Generalization of mplus' that takes a list
+of choice arguments rather than a single one.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amayswitch"
+	  ></A
+	  ><B
+	  >mayswitch</B
+	  > :: Monad m =&gt; [<A HREF = "MonadMaybe.html#t%3AMaybeT"
+	  >MaybeT</A
+	  > m b] -&gt; m b -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Specialization of <TT
+	  ><A HREF = "MonadRun.html#v%3Amswitch"
+	    >mswitch</A
+	    ></TT
+	  > for MaybeT.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "6"
+	  >Monadic function choice</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amchoice'"
+	  ></A
+	  ><B
+	  >mchoice'</B
+	  > :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t) =&gt; (a -&gt; t m b) -&gt; (a -&gt; m b) -&gt; a -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Monadic function choice combinator that confines the partiality effect
+to the first argument. This is a variation on mchoice which
+allows the partiality effect to spread to both arguments and to the
+result.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amchoices"
+	  ></A
+	  ><B
+	  >mchoices</B
+	  > :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t, MonadPlus (t m)) =&gt; [a -&gt; t m b] -&gt; (a -&gt; m b) -&gt; a -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Monadic function choice combinator. Generalization of mchoice' that
+takes a list of choice arguments rather than a single one.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section2"
+	><A NAME = "7"
+	  >Implementation variants</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amswitch0"
+	  ></A
+	  ><B
+	  >mswitch0</B
+	  > :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Implementation variant of <TT
+	  ><A HREF = "MonadRun.html#v%3Amswitch"
+	    >mswitch</A
+	    ></TT
+	  > in terms of foldr.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amswitch1"
+	  ></A
+	  ><B
+	  >mswitch1</B
+	  > :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Implementation variant of <TT
+	  ><A HREF = "MonadRun.html#v%3Amswitch"
+	    >mswitch</A
+	    ></TT
+	  > with mplus' expanded:</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "v%3Amswitch'"
+	  ></A
+	  ><B
+	  >mswitch'</B
+	  > :: (Monad m, <A HREF = "MonadRun.html#t%3AMonadUnTrans"
+	  >MonadUnTrans</A
+	  > <A HREF = "MonadRun.html#t%3AMaybeAlg"
+	  >MaybeAlg</A
+	  > t, MonadPlus (t m)) =&gt; [t m b] -&gt; m b -&gt; m b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	>Implementation variant of <TT
+	  ><A HREF = "MonadRun.html#v%3Amswitch"
+	    >mswitch</A
+	    ></TT
+	  > where the unlift is postponed
+to the very end.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock/"
+	  >Haddock</A
+	  > version 0.6</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>
